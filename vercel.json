@@ -2,8 +2,12 @@
   "version": 2,
   "builds": [
     {
-      "src": "api/index.py",
+      "src": "api/ai.py",
       "use": "@vercel/python"
+    },
+    {
+      "src": "index.html",
+      "use": "@vercel/static"
     },
     {
       "src": "static/**/*",
@@ -12,12 +16,16 @@
   ],
   "routes": [
     {
+      "src": "/api/ai",
+      "dest": "/api/ai.py"
+    },
+    {
       "src": "/static/(.*)",
       "dest": "/static/$1"
     },
     {
-      "src": "/(.*)",
-      "dest": "/api/index.py"
+      "src": "/",
+      "dest": "/index.html"
     }
   ]
 }

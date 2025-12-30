@@ -2054,7 +2054,7 @@ async function callHuggingFace(prompt) {
         return null;
     }
 
-    const response = await fetch('/api/index', {
+    const response = await fetch('/api/ai', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
