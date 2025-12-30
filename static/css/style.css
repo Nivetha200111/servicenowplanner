@@ -1844,3 +1844,95 @@ body {
 .sync-status.offline {
     background: rgba(107, 114, 128, 0.15);
     color: var(--text-muted);
+}
+
+/* n8n Integrations Card */
+.integrations-card {
+    background: var(--bg-card);
+    border-radius: 16px;
+    padding: 20px;
+    border: 1px solid var(--border-color);
+}
+
+.integration-section {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.integration-section:last-of-type {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.integration-section h4 {
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+    color: var(--accent-cyan);
+}
+
+.integration-input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.integration-input-group input {
+    flex: 1;
+    padding: 10px 14px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    font-size: 0.9rem;
+}
+
+.integration-input-group input:focus {
+    outline: none;
+    border-color: var(--accent-cyan);
+}
+
+.integration-input-group input::placeholder {
+    color: var(--text-muted);
+}
+
+.integration-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.integration-checkbox input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--accent-cyan);
+    cursor: pointer;
+}
+
+.reminder-time-select {
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.reminder-time-select select {
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.reminder-time-select select:focus {
+    outline: none;
+    border-color: var(--accent-cyan);
+}

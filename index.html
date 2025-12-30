@@ -527,6 +527,60 @@
                         <!-- Week days will be rendered here -->
                     </div>
                 </div>
+
+                <!-- n8n Integrations -->
+                <div class="integrations-card">
+                    <div class="goals-header">
+                        <h3>Automations (n8n)</h3>
+                        <a href="https://n8n.io" target="_blank" style="font-size: 0.8rem; color: var(--accent-blue);">What's n8n?</a>
+                    </div>
+                    <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 15px;">
+                        Connect to n8n workflows for Google Calendar sync and WhatsApp reminders.
+                    </p>
+
+                    <div class="integration-section">
+                        <h4>Google Calendar Sync</h4>
+                        <div class="integration-input-group">
+                            <input type="url" id="n8n-calendar-webhook" placeholder="n8n Calendar Webhook URL">
+                            <button class="btn btn-secondary" onclick="testCalendarWebhook()">Test</button>
+                        </div>
+                        <label class="integration-checkbox">
+                            <input type="checkbox" id="auto-sync-calendar" onchange="saveN8nSettings()">
+                            <span>Auto-sync scheduled topics to Google Calendar</span>
+                        </label>
+                    </div>
+
+                    <div class="integration-section">
+                        <h4>WhatsApp Reminders</h4>
+                        <div class="integration-input-group">
+                            <input type="url" id="n8n-whatsapp-webhook" placeholder="n8n WhatsApp Webhook URL">
+                            <button class="btn btn-secondary" onclick="testWhatsAppWebhook()">Test</button>
+                        </div>
+                        <div class="integration-input-group">
+                            <input type="tel" id="whatsapp-phone" placeholder="WhatsApp Number (+1234567890)">
+                        </div>
+                        <label class="integration-checkbox">
+                            <input type="checkbox" id="whatsapp-daily-reminder" onchange="saveN8nSettings()">
+                            <span>Send daily study reminder via WhatsApp</span>
+                        </label>
+                        <div class="reminder-time-select" id="whatsapp-time-container" style="display: none;">
+                            <label>Reminder time:</label>
+                            <select id="whatsapp-reminder-time" onchange="saveN8nSettings()">
+                                <option value="07:00">7:00 AM</option>
+                                <option value="08:00">8:00 AM</option>
+                                <option value="09:00" selected>9:00 AM</option>
+                                <option value="10:00">10:00 AM</option>
+                                <option value="18:00">6:00 PM</option>
+                                <option value="19:00">7:00 PM</option>
+                                <option value="20:00">8:00 PM</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary" style="width: 100%; margin-top: 15px;" onclick="saveN8nSettings()">
+                        Save Integration Settings
+                    </button>
+                </div>
             </div>
         </div>
     </main>

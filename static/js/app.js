@@ -1600,6 +1600,12 @@ function openScheduleTopicModal() {
     weeklyPlan[targetDate].push({ name: topicName, completed: false });
     saveWeeklyPlan();
     renderWeeklyPlan();
+
+    // Sync to Google Calendar if enabled
+    if (n8nSettings.autoSyncCalendar && n8nSettings.calendarWebhook) {
+        syncToGoogleCalendar(topicName, targetDate);
+        console.log('Topic synced to Google Calendar');
+    }
 }
 
 // Initialize planner when page loads
@@ -1608,6 +1614,12 @@ function initPlanner() {
     loadDailyGoals();
     loadReminders();
     loadWeeklyPlan();
+    loadN8nSettings();
+
+    // Start WhatsApp reminder scheduler if enabled
+    if (n8nSettings.whatsappDailyReminder && n8nSettings.whatsappWebhook) {
+        scheduleWhatsAppReminder();
+    }
 }
 
 // ==================== SUPABASE & AUTH ====================
@@ -2281,6 +2293,262 @@ function autoPopulateWeek() {
     saveWeeklyPlan();
     renderWeeklyPlan();
     alert('Weekly planner populated with smart suggestions!');
+}
+
+// ==================== N8N INTEGRATIONS ====================
+
+let n8nSettings = {
+    calendarWebhook: '',
+    whatsappWebhook: '',
+    whatsappPhone: '',
+    autoSyncCalendar: false,
+    whatsappDailyReminder: false,
+    whatsappReminderTime: '09:00'
+};
+
+function loadN8nSettings() {
+    const saved = localStorage.getItem('snowprep-n8n');
+    if (saved) {
+        n8nSettings = { ...n8nSettings, ...JSON.parse(saved) };
+    }
+
+    // Populate form fields
+    const calendarInput = document.getElementById('n8n-calendar-webhook');
+    const whatsappInput = document.getElementById('n8n-whatsapp-webhook');
+    const phoneInput = document.getElementById('whatsapp-phone');
+    const autoSyncCheckbox = document.getElementById('auto-sync-calendar');
+    const dailyReminderCheckbox = document.getElementById('whatsapp-daily-reminder');
+    const reminderTimeSelect = document.getElementById('whatsapp-reminder-time');
+    const timeContainer = document.getElementById('whatsapp-time-container');
+
+    if (calendarInput) calendarInput.value = n8nSettings.calendarWebhook || '';
+    if (whatsappInput) whatsappInput.value = n8nSettings.whatsappWebhook || '';
+    if (phoneInput) phoneInput.value = n8nSettings.whatsappPhone || '';
+    if (autoSyncCheckbox) autoSyncCheckbox.checked = n8nSettings.autoSyncCalendar;
+    if (dailyReminderCheckbox) dailyReminderCheckbox.checked = n8nSettings.whatsappDailyReminder;
+    if (reminderTimeSelect) reminderTimeSelect.value = n8nSettings.whatsappReminderTime || '09:00';
+    if (timeContainer) timeContainer.style.display = n8nSettings.whatsappDailyReminder ? 'flex' : 'none';
+}
+
+function saveN8nSettings() {
+    const calendarInput = document.getElementById('n8n-calendar-webhook');
+    const whatsappInput = document.getElementById('n8n-whatsapp-webhook');
+    const phoneInput = document.getElementById('whatsapp-phone');
+    const autoSyncCheckbox = document.getElementById('auto-sync-calendar');
+    const dailyReminderCheckbox = document.getElementById('whatsapp-daily-reminder');
+    const reminderTimeSelect = document.getElementById('whatsapp-reminder-time');
+    const timeContainer = document.getElementById('whatsapp-time-container');
+
+    n8nSettings = {
+        calendarWebhook: calendarInput?.value?.trim() || '',
+        whatsappWebhook: whatsappInput?.value?.trim() || '',
+        whatsappPhone: phoneInput?.value?.trim() || '',
+        autoSyncCalendar: autoSyncCheckbox?.checked || false,
+        whatsappDailyReminder: dailyReminderCheckbox?.checked || false,
+        whatsappReminderTime: reminderTimeSelect?.value || '09:00'
+    };
+
+    localStorage.setItem('snowprep-n8n', JSON.stringify(n8nSettings));
+
+    // Show/hide time selector
+    if (timeContainer) {
+        timeContainer.style.display = n8nSettings.whatsappDailyReminder ? 'flex' : 'none';
+    }
+
+    // Schedule WhatsApp reminder if enabled
+    if (n8nSettings.whatsappDailyReminder && n8nSettings.whatsappWebhook) {
+        scheduleWhatsAppReminder();
+    }
+
+    console.log('n8n settings saved:', n8nSettings);
+}
+
+async function testCalendarWebhook() {
+    const webhook = document.getElementById('n8n-calendar-webhook')?.value?.trim();
+
+    if (!webhook) {
+        alert('Please enter a webhook URL first');
+        return;
+    }
+
+    try {
+        const response = await fetch(webhook, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                test: true,
+                event: 'Test Event from SNowPrep',
+                date: new Date().toISOString().split('T')[0],
+                startTime: '10:00',
+                endTime: '11:00',
+                description: 'This is a test event to verify the Google Calendar integration.'
+            })
+        });
+
+        if (response.ok) {
+            alert('Calendar webhook test successful! Check your n8n workflow execution.');
+        } else {
+            alert('Webhook returned an error. Check your n8n workflow.');
+        }
+    } catch (error) {
+        console.error('Calendar webhook test error:', error);
+        alert('Failed to reach webhook. Make sure the URL is correct and n8n is running.');
+    }
+}
+
+async function testWhatsAppWebhook() {
+    const webhook = document.getElementById('n8n-whatsapp-webhook')?.value?.trim();
+    const phone = document.getElementById('whatsapp-phone')?.value?.trim();
+
+    if (!webhook) {
+        alert('Please enter a webhook URL first');
+        return;
+    }
+
+    if (!phone) {
+        alert('Please enter your WhatsApp phone number');
+        return;
+    }
+
+    try {
+        const response = await fetch(webhook, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                test: true,
+                phone: phone,
+                message: 'Hello from SNowPrep! Your WhatsApp integration is working correctly.'
+            })
+        });
+
+        if (response.ok) {
+            alert('WhatsApp webhook test successful! Check your phone for a message.');
+        } else {
+            alert('Webhook returned an error. Check your n8n workflow.');
+        }
+    } catch (error) {
+        console.error('WhatsApp webhook test error:', error);
+        alert('Failed to reach webhook. Make sure the URL is correct and n8n is running.');
+    }
+}
+
+// Sync a topic to Google Calendar via n8n
+async function syncToGoogleCalendar(topicName, date, duration = 60) {
+    if (!n8nSettings.calendarWebhook || !n8nSettings.autoSyncCalendar) {
+        return false;
+    }
+
+    try {
+        const startTime = '09:00'; // Default study time
+        const endHour = Math.floor(duration / 60) + 9;
+        const endMinute = duration % 60;
+        const endTime = `${String(endHour).padStart(2, '0')}:${String(endMinute).padStart(2, '0')}`;
+
+        await fetch(n8nSettings.calendarWebhook, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                event: `Study: ${topicName}`,
+                date: date,
+                startTime: startTime,
+                endTime: endTime,
+                description: `ServiceNow study session - ${topicName}\n\nScheduled via SNowPrep`
+            })
+        });
+
+        console.log('Synced to Google Calendar:', topicName);
+        return true;
+    } catch (error) {
+        console.error('Google Calendar sync error:', error);
+        return false;
+    }
+}
+
+// Send WhatsApp reminder via n8n
+async function sendWhatsAppReminder(message) {
+    if (!n8nSettings.whatsappWebhook || !n8nSettings.whatsappPhone) {
+        return false;
+    }
+
+    try {
+        await fetch(n8nSettings.whatsappWebhook, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                phone: n8nSettings.whatsappPhone,
+                message: message
+            })
+        });
+
+        console.log('WhatsApp reminder sent');
+        return true;
+    } catch (error) {
+        console.error('WhatsApp reminder error:', error);
+        return false;
+    }
+}
+
+// Schedule daily WhatsApp reminder
+let whatsappReminderInterval = null;
+
+function scheduleWhatsAppReminder() {
+    // Clear existing interval
+    if (whatsappReminderInterval) {
+        clearInterval(whatsappReminderInterval);
+    }
+
+    // Check every minute if it's reminder time
+    whatsappReminderInterval = setInterval(() => {
+        if (!n8nSettings.whatsappDailyReminder) return;
+
+        const now = new Date();
+        const currentTime = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+
+        if (currentTime === n8nSettings.whatsappReminderTime) {
+            // Check if we already sent today
+            const lastSent = localStorage.getItem('snowprep-whatsapp-last-sent');
+            const today = now.toDateString();
+
+            if (lastSent !== today) {
+                // Generate personalized message
+                const summary = getProgressSummary();
+                const recommended = getSmartTopicRecommendations(3);
+
+                let message = `*SNowPrep Daily Reminder*\n\n`;
+                message += `Your progress: ${summary.percent}% complete\n\n`;
+
+                if (recommended.length > 0) {
+                    message += `Today's recommended topics:\n`;
+                    recommended.forEach((t, i) => {
+                        message += `${i + 1}. ${t.name} (${t.cert})\n`;
+                    });
+                }
+
+                message += `\nKeep up the great work!`;
+
+                sendWhatsAppReminder(message);
+                localStorage.setItem('snowprep-whatsapp-last-sent', today);
+            }
+        }
+    }, 60000); // Check every minute
+}
+
+// Override the weekly plan topic add to sync with Google Calendar
+const originalAddWeeklyTopic = weeklyPlan;
+
+function addWeeklyTopicWithSync(dateStr, topicName) {
+    if (!weeklyPlan[dateStr]) {
+        weeklyPlan[dateStr] = [];
+    }
+
+    weeklyPlan[dateStr].push({ name: topicName, completed: false });
+    saveWeeklyPlan();
+    renderWeeklyPlan();
+
+    // Sync to Google Calendar if enabled
+    if (n8nSettings.autoSyncCalendar && n8nSettings.calendarWebhook) {
+        syncToGoogleCalendar(topicName, dateStr);
+    }
 }
 
 // ==================== INITIALIZATION ====================
