@@ -1615,10 +1615,16 @@ function initPlanner() {
     loadReminders();
     loadWeeklyPlan();
     loadN8nSettings();
+    loadTelegramSettings();
 
     // Start WhatsApp reminder scheduler if enabled
     if (n8nSettings.whatsappDailyReminder && n8nSettings.whatsappWebhook) {
         scheduleWhatsAppReminder();
+    }
+
+    // Start Telegram reminder scheduler if enabled
+    if (telegramSettings.dailyReminder) {
+        scheduleTelegramReminder();
     }
 }
 
@@ -2305,6 +2311,12 @@ let n8nSettings = {
     whatsappDailyReminder: false,
     whatsappReminderTime: '09:00'
 };
+let telegramSettings = {
+    botToken: '',
+    chatId: '',
+    dailyReminder: false,
+    reminderTime: '09:00'
+};
 
 function loadN8nSettings() {
     const saved = localStorage.getItem('snowprep-n8n');
@@ -2551,6 +2563,298 @@ function addWeeklyTopicWithSync(dateStr, topicName) {
     }
 }
 
+// ==================== TELEGRAM BOT ====================
+
+let telegramReminderInterval = null;
+
+function loadTelegramSettings() {
+    const saved = localStorage.getItem('snowprep-telegram');
+    if (saved) {
+        telegramSettings = { ...telegramSettings, ...JSON.parse(saved) };
+    }
+
+    const tokenInput = document.getElementById('telegram-bot-token');
+    const chatInput = document.getElementById('telegram-chat-id');
+    const dailyCheckbox = document.getElementById('telegram-daily-reminder');
+    const reminderTimeSelect = document.getElementById('telegram-reminder-time');
+    const timeContainer = document.getElementById('telegram-time-container');
+
+    if (tokenInput) tokenInput.value = telegramSettings.botToken || '';
+    if (chatInput) chatInput.value = telegramSettings.chatId || '';
+    if (dailyCheckbox) dailyCheckbox.checked = telegramSettings.dailyReminder;
+    if (reminderTimeSelect) reminderTimeSelect.value = telegramSettings.reminderTime || '09:00';
+    if (timeContainer) timeContainer.style.display = telegramSettings.dailyReminder ? 'flex' : 'none';
+
+    if (telegramSettings.dailyReminder) {
+        scheduleTelegramReminder();
+    }
+}
+
+function saveTelegramSettings() {
+    const tokenInput = document.getElementById('telegram-bot-token');
+    const chatInput = document.getElementById('telegram-chat-id');
+    const dailyCheckbox = document.getElementById('telegram-daily-reminder');
+    const reminderTimeSelect = document.getElementById('telegram-reminder-time');
+    const timeContainer = document.getElementById('telegram-time-container');
+
+    telegramSettings = {
+        botToken: tokenInput?.value?.trim() || '',
+        chatId: chatInput?.value?.trim() || '',
+        dailyReminder: dailyCheckbox?.checked || false,
+        reminderTime: reminderTimeSelect?.value || '09:00'
+    };
+
+    localStorage.setItem('snowprep-telegram', JSON.stringify(telegramSettings));
+
+    if (timeContainer) {
+        timeContainer.style.display = telegramSettings.dailyReminder ? 'flex' : 'none';
+    }
+
+    if (telegramReminderInterval) {
+        clearInterval(telegramReminderInterval);
+    }
+
+    if (telegramSettings.dailyReminder) {
+        scheduleTelegramReminder();
+    }
+
+    console.log('Telegram settings saved:', { ...telegramSettings, botToken: '[hidden]' });
+}
+
+async function sendTelegramMessage(message, showAlert = true) {
+    const hasLocalToken = Boolean(telegramSettings.botToken);
+    const hasLocalChat = Boolean(telegramSettings.chatId);
+
+    // Prefer backend when no token is stored locally
+    if (!hasLocalToken) {
+        const backendSent = await sendTelegramViaBackend(message, telegramSettings.chatId, showAlert);
+        if (backendSent) return true;
+        if (showAlert) {
+            alert('Telegram backend send failed. Add your bot token & chat ID in Automations or set TELEGRAM_BOT_TOKEN on the server.');
+        }
+        return false;
+    }
+
+    if (!hasLocalChat) {
+        if (showAlert) alert('Please add your Telegram chat ID or @username.');
+        return false;
+    }
+
+    return sendTelegramDirect(message, showAlert);
+}
+
+async function sendTelegramViaBackend(message, chatId, showAlert) {
+    try {
+        const response = await fetch('/api/telegram-send', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                message,
+                chatId: chatId || undefined
+            })
+        });
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(errorText || 'Backend Telegram error');
+        }
+
+        return true;
+    } catch (error) {
+        console.error('Telegram backend error:', error);
+        if (showAlert) {
+            alert('Failed to send via backend. Check server logs or add the bot token/chat ID in Automations.');
+        }
+        return false;
+    }
+}
+
+async function sendTelegramDirect(message, showAlert) {
+    try {
+        const response = await fetch(`https://api.telegram.org/bot${telegramSettings.botToken}/sendMessage`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                chat_id: telegramSettings.chatId,
+                text: message,
+                parse_mode: 'Markdown'
+            })
+        });
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(errorText || 'Telegram API error');
+        }
+
+        return true;
+    } catch (error) {
+        console.error('Telegram send error:', error);
+        if (showAlert) {
+            alert('Failed to reach Telegram. Check your token/chat ID and try again.');
+        }
+        return false;
+    }
+}
+
+function getStartOfWeekISO(date = new Date()) {
+    const start = new Date(date);
+    start.setHours(0, 0, 0, 0);
+    start.setDate(start.getDate() - start.getDay());
+    return start.toISOString().split('T')[0];
+}
+
+function buildTelegramDailyMessage() {
+    const today = new Date();
+    const todayStr = today.toISOString().split('T')[0];
+    const summary = getProgressSummary();
+    const scheduled = weeklyPlan[todayStr] || [];
+    const recommended = getSmartTopicRecommendations(3);
+
+    let message = '*SNowPrep Daily Topics*\n';
+    message += `Date: ${todayStr}\n`;
+    message += `Progress: ${summary.percent}% (${summary.completed}/${summary.total})\n\n`;
+
+    if (scheduled.length > 0) {
+        message += "Today's scheduled topics:\n";
+        scheduled.forEach((t, i) => {
+            const name = t.name || t;
+            message += `${i + 1}. ${name}${t.completed ? ' ✅' : ''}\n`;
+        });
+    } else if (recommended.length > 0) {
+        message += 'No topics scheduled. Suggested focus:\n';
+        recommended.forEach((t, i) => {
+            message += `${i + 1}. ${t.name} (${t.cert})\n`;
+        });
+    } else {
+        message += 'All topics complete! Time for practice quizzes and reviews.\n';
+    }
+
+    message += '\nStay consistent—short sessions count.';
+    return message;
+}
+
+async function sendTelegramDailyMessage(forceFeedback = false) {
+    const success = await sendTelegramMessage(buildTelegramDailyMessage(), forceFeedback);
+
+    if (success) {
+        localStorage.setItem('snowprep-telegram-last-sent', new Date().toDateString());
+        if (forceFeedback) {
+            alert("Sent to Telegram! Check your chat for today's plan.");
+        }
+    }
+
+    return success;
+}
+
+function buildTelegramWeeklyMessage() {
+    const today = new Date();
+    const startOfWeek = new Date(today);
+    startOfWeek.setDate(today.getDate() - today.getDay());
+    const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+    let message = '*SNowPrep Weekly Plan*\n';
+    message += `Week of ${getStartOfWeekISO(today)}\n\n`;
+
+    let hasTopics = false;
+    for (let i = 0; i < 7; i++) {
+        const date = new Date(startOfWeek);
+        date.setDate(startOfWeek.getDate() + i);
+        const dateStr = date.toISOString().split('T')[0];
+        const topics = weeklyPlan[dateStr] || [];
+
+        message += `${dayNames[date.getDay()]} (${dateStr}):\n`;
+        if (topics.length > 0) {
+            hasTopics = true;
+            topics.forEach((t, idx) => {
+                const name = t.name || t;
+                message += `- ${idx + 1}. ${name}${t.completed ? ' ✅' : ''}\n`;
+            });
+        } else {
+            message += '- No topics scheduled\n';
+        }
+        message += '\n';
+    }
+
+    if (!hasTopics) {
+        const suggestions = getSmartTopicRecommendations(10);
+        if (suggestions.length > 0) {
+            message += 'No weekly plan found. Suggested focus order:\n';
+            suggestions.forEach((t, i) => {
+                message += `${i + 1}. ${t.name} (${t.cert})\n`;
+            });
+        } else {
+            message += 'Everything is complete—time to review and take mock exams!\n';
+        }
+    }
+
+    message += '\nSet your targets for the week and keep momentum going.';
+    return message;
+}
+
+async function sendTelegramWeeklyMessage(forceFeedback = false) {
+    const success = await sendTelegramMessage(buildTelegramWeeklyMessage(), forceFeedback);
+    if (success) {
+        const weekKey = getStartOfWeekISO(new Date());
+        localStorage.setItem('snowprep-telegram-weekly-last', weekKey);
+        if (forceFeedback) {
+            alert('Weekly plan sent to Telegram!');
+        }
+    }
+    return success;
+}
+
+async function testTelegramBot() {
+    saveTelegramSettings();
+
+    const success = await sendTelegramMessage('✅ Telegram bot connected! You will start receiving study reminders from SNowPrep.');
+    if (success) {
+        alert('Test message sent. Check Telegram to confirm the bot is reachable.');
+    }
+}
+
+async function sendTodayTelegramPlan() {
+    saveTelegramSettings();
+    await sendTelegramDailyMessage(true);
+}
+
+function scheduleTelegramReminder() {
+    if (telegramReminderInterval) {
+        clearInterval(telegramReminderInterval);
+    }
+
+    telegramReminderInterval = setInterval(() => {
+        if (!telegramSettings.dailyReminder) {
+            return;
+        }
+
+        const now = new Date();
+        const currentTime = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+
+        if (currentTime === telegramSettings.reminderTime) {
+            const lastSent = localStorage.getItem('snowprep-telegram-last-sent');
+            const today = now.toDateString();
+
+            if (lastSent !== today) {
+                sendTelegramDailyMessage();
+            }
+
+            // Send weekly plan every Sunday
+            if (now.getDay() === 0) {
+                const weekKey = getStartOfWeekISO(now);
+                const lastWeekly = localStorage.getItem('snowprep-telegram-weekly-last');
+                if (lastWeekly !== weekKey) {
+                    sendTelegramWeeklyMessage();
+                }
+            }
+        }
+    }, 60000);
+}
+
+function saveIntegrationSettings() {
+    saveN8nSettings();
+    saveTelegramSettings();
+}
+
 // ==================== INITIALIZATION ====================
 document.addEventListener('DOMContentLoaded', function() {
     console.log('SNowPrep: Initializing...');
@@ -2609,6 +2913,8 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('signup-form')?.addEventListener('submit', handleSignup);
         document.getElementById('supabase-url')?.addEventListener('change', saveSupabaseConfig);
         document.getElementById('supabase-key')?.addEventListener('change', saveSupabaseConfig);
+        document.getElementById('telegram-bot-token')?.addEventListener('change', saveTelegramSettings);
+        document.getElementById('telegram-chat-id')?.addEventListener('change', saveTelegramSettings);
 
         console.log('SNowPrep: Ready!');
     } catch (error) {

@@ -531,11 +531,11 @@
                 <!-- n8n Integrations -->
                 <div class="integrations-card">
                     <div class="goals-header">
-                        <h3>Automations (n8n)</h3>
+                        <h3>Automations & Alerts</h3>
                         <a href="https://n8n.io" target="_blank" style="font-size: 0.8rem; color: var(--accent-blue);">What's n8n?</a>
                     </div>
                     <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 15px;">
-                        Connect to n8n workflows for Google Calendar sync and WhatsApp reminders.
+                        Connect to n8n workflows for Google Calendar sync and WhatsApp reminders, plus send study nudges via your Telegram bot.
                     </p>
 
                     <div class="integration-section">
@@ -577,7 +577,38 @@
                         </div>
                     </div>
 
-                    <button class="btn btn-primary" style="width: 100%; margin-top: 15px;" onclick="saveN8nSettings()">
+                    <div class="integration-section">
+                        <h4>Telegram Bot</h4>
+                        <div class="integration-input-group">
+                            <input type="text" id="telegram-bot-token" placeholder="Bot Token (from @BotFather)">
+                            <button class="btn btn-secondary" onclick="testTelegramBot()">Test</button>
+                        </div>
+                        <div class="integration-input-group">
+                            <input type="text" id="telegram-chat-id" placeholder="Chat ID or @username">
+                            <button class="btn btn-secondary" onclick="sendTodayTelegramPlan()">Send Today's Plan</button>
+                        </div>
+                        <p style="color: var(--text-muted); font-size: 0.8rem; margin: 4px 0 12px;">
+                            Stored only in your browser. Start a chat with your bot before testing.
+                        </p>
+                        <label class="integration-checkbox">
+                            <input type="checkbox" id="telegram-daily-reminder" onchange="saveTelegramSettings()">
+                            <span>Send daily study reminder via Telegram</span>
+                        </label>
+                        <div class="reminder-time-select" id="telegram-time-container" style="display: none;">
+                            <label>Reminder time:</label>
+                            <select id="telegram-reminder-time" onchange="saveTelegramSettings()">
+                                <option value="07:00">7:00 AM</option>
+                                <option value="08:00">8:00 AM</option>
+                                <option value="09:00" selected>9:00 AM</option>
+                                <option value="10:00">10:00 AM</option>
+                                <option value="18:00">6:00 PM</option>
+                                <option value="19:00">7:00 PM</option>
+                                <option value="20:00">8:00 PM</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary" style="width: 100%; margin-top: 15px;" onclick="saveIntegrationSettings()">
                         Save Integration Settings
                     </button>
                 </div>
