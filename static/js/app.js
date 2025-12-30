@@ -1613,7 +1613,7 @@ function initPlanner() {
 
 // ==================== SUPABASE & AUTH ====================
 
-let supabase = null;
+let supabaseClient = null;
 let currentUser = null;
 let isOnline = false;
 
@@ -1652,7 +1652,7 @@ function saveSupabaseConfig() {
 
 function initSupabase(url, key) {
     try {
-        supabase = window.supabase.createClient(url, key);
+        supabaseClient = window.supabase.createClient(url, key);
         console.log('Supabase initialized');
         checkSession();
     } catch (error) {
@@ -1662,10 +1662,10 @@ function initSupabase(url, key) {
 }
 
 async function checkSession() {
-    if (!supabase) return;
+    if (!supabaseClient) return;
 
     try {
-        const { data: { session }, error } = await supabase.auth.getSession();
+        const { data: { session }, error } = await supabaseClient.auth.getSession();
 
         if (session?.user) {
             currentUser = session.user;
@@ -1714,7 +1714,7 @@ function hideAuthError() {
 async function handleLogin(event) {
     event.preventDefault();
 
-    if (!supabase) {
+    if (!supabaseClient) {
         showAuthError('Please configure Supabase first');
         return;
     }
@@ -1728,7 +1728,7 @@ async function handleLogin(event) {
     hideAuthError();
 
     try {
-        const { data, error } = await supabase.auth.signInWithPassword({
+        const { data, error } = await supabaseClient.auth.signInWithPassword({
             email,
             password
         });
@@ -1748,7 +1748,7 @@ async function handleLogin(event) {
 async function handleSignup(event) {
     event.preventDefault();
 
-    if (!supabase) {
+    if (!supabaseClient) {
         showAuthError('Please configure Supabase first');
         return;
     }
@@ -1768,7 +1768,7 @@ async function handleSignup(event) {
     hideAuthError();
 
     try {
-        const { data, error } = await supabase.auth.signUp({
+        const { data, error } = await supabaseClient.auth.signUp({
             email,
             password
         });
@@ -1790,10 +1790,10 @@ async function handleSignup(event) {
 }
 
 async function handleLogout() {
-    if (!supabase) return;
+    if (!supabaseClient) return;
 
     try {
-        await supabase.auth.signOut();
+        await supabaseClient.auth.signOut();
         currentUser = null;
         isOnline = false;
         updateAuthUI();
@@ -1868,7 +1868,7 @@ document.addEventListener('click', (e) => {
 // ==================== DATABASE SYNC ====================
 
 async function syncNow() {
-    if (!supabase || !currentUser) {
+    if (!supabaseClient || !currentUser) {
         showAuthOverlay();
         return;
     }
@@ -1886,7 +1886,7 @@ async function syncNow() {
 }
 
 async function saveToCloud() {
-    if (!supabase || !currentUser) return;
+    if (!supabaseClient || !currentUser) return;
 
     const userData = {
         user_id: currentUser.id,
@@ -1916,7 +1916,7 @@ async function saveToCloud() {
 }
 
 async function loadFromCloud() {
-    if (!supabase || !currentUser) return;
+    if (!supabaseClient || !currentUser) return;
 
     try {
         const { data, error } = await supabase
