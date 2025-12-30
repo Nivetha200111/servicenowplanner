@@ -30,7 +30,7 @@ def ai_proxy():
             return jsonify({'error': 'Missing token or prompt'}), 400
 
         response = requests.post(
-            'https://api-inference.huggingface.co/models/mistralai/Mixtral-8x7B-Instruct-v0.1',
+            'https://router.huggingface.co/hf-inference/models/mistralai/Mixtral-8x7B-Instruct-v0.1',
             headers={
                 'Authorization': f'Bearer {token}',
                 'Content-Type': 'application/json'
