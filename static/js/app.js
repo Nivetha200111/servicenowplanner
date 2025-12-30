@@ -1608,7 +1608,6 @@ function initPlanner() {
     loadDailyGoals();
     loadReminders();
     loadWeeklyPlan();
-    loadAISettings();
 }
 
 // ==================== SUPABASE & AUTH ====================
@@ -1983,26 +1982,11 @@ saveState = function() {
     scheduleSync();
 };
 
-// ==================== AI PLANNER ====================
+// ==================== SMART PLANNER ====================
 
-let hfToken = '';
-
-function loadAISettings() {
-    const saved = localStorage.getItem('snowprep-hf-token');
-    if (saved) {
-        hfToken = saved;
-        const input = document.getElementById('hf-token');
-        if (input) input.value = saved;
-    }
-}
-
-function saveHFToken() {
-    const input = document.getElementById('hf-token');
-    if (input) {
-        hfToken = input.value.trim();
-        localStorage.setItem('snowprep-hf-token', hfToken);
-    }
-}
+// Spaced repetition weights for difficulty
+const DIFFICULTY_WEIGHTS = { easy: 1, medium: 2, hard: 3 };
+const TOPICS_PER_DAY = { weekday: 3, weekend: 2 };
 
 function getIncompleteTopics() {
     const topics = [];
@@ -2048,40 +2032,7 @@ function getProgressSummary() {
     return { completed, total, percent, byCert };
 }
 
-async function callHuggingFace(prompt) {
-    if (!hfToken) {
-        alert('Please enter your Hugging Face API token first!');
-        return null;
-    }
-
-    const response = await fetch('/api/ai', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            token: hfToken,
-            prompt: prompt
-        })
-    });
-
-    const result = await response.json();
-
-    if (!response.ok) {
-        throw new Error(result.error || 'API Error');
-    }
-
-    return result.text || '';
-}
-
-function showAILoading(message) {
-    const output = document.getElementById('ai-output');
-    const content = document.getElementById('ai-output-content');
-    output.classList.add('visible');
-    content.innerHTML = `<div class="ai-loading"><div class="ai-spinner"></div>${message}</div>`;
-}
-
-function showAIOutput(title, html) {
+function showPlannerOutput(title, html) {
     const output = document.getElementById('ai-output');
     const titleEl = document.getElementById('ai-output-title');
     const content = document.getElementById('ai-output-content');
@@ -2091,154 +2042,199 @@ function showAIOutput(title, html) {
     content.innerHTML = html;
 }
 
-async function generateDailyPlan() {
+// Smart algorithm: Prioritize topics based on certification progress and difficulty
+function getSmartTopicRecommendations(count = 4) {
+    const incomplete = getIncompleteTopics();
+    const summary = getProgressSummary();
+
+    if (incomplete.length === 0) return [];
+
+    // Find the certification with lowest progress - prioritize it
+    const certPriority = Object.entries(summary.byCert)
+        .sort((a, b) => a[1].percent - b[1].percent)
+        .map(([cert]) => cert);
+
+    // Score each topic
+    const scoredTopics = incomplete.map(topic => {
+        let score = 0;
+
+        // Higher score for lower-progress certifications
+        const certIndex = certPriority.indexOf(topic.cert);
+        score += (3 - certIndex) * 10;
+
+        // Difficulty progression: easy first if < 30%, medium if 30-60%, hard if > 60%
+        const certProgress = summary.byCert[topic.cert]?.percent || 0;
+        if (certProgress < 30 && topic.difficulty === 'easy') score += 15;
+        else if (certProgress >= 30 && certProgress < 60 && topic.difficulty === 'medium') score += 15;
+        else if (certProgress >= 60 && topic.difficulty === 'hard') score += 15;
+
+        // Small random factor to vary recommendations
+        score += Math.random() * 5;
+
+        return { ...topic, score };
+    });
+
+    // Sort by score and return top N
+    return scoredTopics.sort((a, b) => b.score - a.score).slice(0, count);
+}
+
+function generateDailyPlan() {
     const btn = document.getElementById('ai-daily-btn');
     btn.disabled = true;
 
-    try {
-        showAILoading('Analyzing your progress and generating goals...');
+    const summary = getProgressSummary();
+    const recommended = getSmartTopicRecommendations(4);
 
-        const incomplete = getIncompleteTopics();
-        const summary = getProgressSummary();
-
-        // Smart selection: prioritize by difficulty progression
-        const easyTopics = incomplete.filter(t => t.difficulty === 'easy').slice(0, 3);
-        const mediumTopics = incomplete.filter(t => t.difficulty === 'medium').slice(0, 3);
-        const hardTopics = incomplete.filter(t => t.difficulty === 'hard').slice(0, 2);
-
-        const prompt = `<s>[INST] You are a ServiceNow certification study coach. Based on the student's progress, suggest 3-5 specific topics to study TODAY.
-
-Current Progress: ${summary.percent}% complete (${summary.completed}/${summary.total} topics)
-- CSA: ${summary.byCert.CSA.percent}% complete
-- CAD: ${summary.byCert.CAD.percent}% complete
-- CIS-ITSM: ${summary.byCert['CIS-ITSM'].percent}% complete
-
-Available topics to study (not yet completed):
-Easy: ${easyTopics.map(t => t.name).join(', ') || 'None'}
-Medium: ${mediumTopics.map(t => t.name).join(', ') || 'None'}
-Hard: ${hardTopics.map(t => t.name).join(', ') || 'None'}
-
-Give me exactly 4 specific topics to focus on today. For each topic, briefly explain why (1 sentence). Format as a numbered list. Be concise. [/INST]</s>`;
-
-        const aiResponse = await callHuggingFace(prompt);
-
-        if (aiResponse) {
-            // Parse AI response and create suggestions
-            const lines = aiResponse.split('\n').filter(l => l.trim());
-            let suggestionsHtml = '';
-
-            // Also add quick-add buttons for the topics
-            const suggestedTopics = [...easyTopics.slice(0, 2), ...mediumTopics.slice(0, 2)];
-
-            suggestionsHtml += `<div style="margin-bottom: 15px; white-space: pre-wrap; line-height: 1.6;">${aiResponse}</div>`;
-            suggestionsHtml += `<h4 style="margin: 20px 0 10px; font-size: 0.95rem;">Quick Add to Today's Goals:</h4>`;
-
-            suggestedTopics.forEach(topic => {
-                suggestionsHtml += `
-                    <div class="ai-suggestion">
-                        <span class="ai-suggestion-text">${topic.name} <small style="color: var(--text-muted);">(${topic.cert} - ${topic.difficulty})</small></span>
-                        <button class="ai-suggestion-add" onclick="addAIGoal('${topic.name.replace(/'/g, "\\'")}')">+ Add</button>
-                    </div>
-                `;
-            });
-
-            showAIOutput("Today's Recommended Study Plan", suggestionsHtml);
-        }
-    } catch (error) {
-        showAIOutput('Error', `<p style="color: var(--accent-red);">${error.message}</p><p>Make sure your Hugging Face token is valid and has API access.</p>`);
+    if (recommended.length === 0) {
+        showPlannerOutput("Congratulations!", `<p>You've completed all topics! Time to take practice quizzes.</p>`);
+        btn.disabled = false;
+        return;
     }
 
+    // Generate explanation based on progress
+    const lowestCert = Object.entries(summary.byCert)
+        .sort((a, b) => a[1].percent - b[1].percent)[0];
+
+    let explanation = `<div style="margin-bottom: 20px; padding: 15px; background: var(--bg-tertiary); border-radius: 10px;">
+        <p><strong>Today's Focus:</strong> ${lowestCert[0]} (${lowestCert[1].percent}% complete)</p>
+        <p style="color: var(--text-muted); margin-top: 8px;">These topics are selected based on your progress and optimal difficulty progression.</p>
+    </div>`;
+
+    let suggestionsHtml = explanation;
+    suggestionsHtml += `<h4 style="margin: 15px 0 10px;">Recommended Topics:</h4>`;
+
+    recommended.forEach((topic, i) => {
+        const reason = topic.difficulty === 'easy' ? 'Build foundation' :
+                       topic.difficulty === 'medium' ? 'Core concept' : 'Advanced mastery';
+        suggestionsHtml += `
+            <div class="ai-suggestion">
+                <span class="ai-suggestion-text">
+                    <strong>${i + 1}. ${topic.name}</strong>
+                    <small style="color: var(--text-muted); display: block;">${topic.cert} · ${topic.difficulty} · ${reason}</small>
+                </span>
+                <button class="ai-suggestion-add" onclick="addSmartGoal('${topic.name.replace(/'/g, "\\'")}')">+ Add</button>
+            </div>
+        `;
+    });
+
+    showPlannerOutput("Today's Study Plan", suggestionsHtml);
     btn.disabled = false;
 }
 
-async function generateWeeklyPlan() {
+function generateWeeklyPlan() {
     const btn = document.getElementById('ai-weekly-btn');
     btn.disabled = true;
 
-    try {
-        showAILoading('Creating your personalized weekly study plan...');
+    const incomplete = getIncompleteTopics();
+    const summary = getProgressSummary();
 
-        const incomplete = getIncompleteTopics();
-        const summary = getProgressSummary();
-
-        const prompt = `<s>[INST] You are a ServiceNow certification study planner. Create a 7-day study plan.
-
-Student Progress: ${summary.percent}% complete
-- CSA: ${summary.byCert.CSA.percent}%
-- CAD: ${summary.byCert.CAD.percent}%
-- CIS-ITSM: ${summary.byCert['CIS-ITSM'].percent}%
-
-Topics remaining: ${incomplete.length} topics
-Sample topics: ${incomplete.slice(0, 10).map(t => t.name).join(', ')}
-
-Create a balanced weekly schedule (Mon-Sun). Each day should have 2-3 topics. Include rest/review days. Consider difficulty progression. Be specific with topic names. Format:
-Monday: [topics]
-Tuesday: [topics]
-etc. [/INST]</s>`;
-
-        const aiResponse = await callHuggingFace(prompt);
-
-        if (aiResponse) {
-            let html = `<div style="white-space: pre-wrap; line-height: 1.8;">${aiResponse}</div>`;
-
-            // Add button to auto-populate the weekly planner
-            html += `
-                <div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid var(--border-color);">
-                    <button class="ai-btn secondary" onclick="autoPopulateWeek()">
-                        <span>📥</span> Auto-fill Weekly Planner with Suggestions
-                    </button>
-                </div>
-            `;
-
-            showAIOutput('Your AI-Generated Weekly Plan', html);
-        }
-    } catch (error) {
-        showAIOutput('Error', `<p style="color: var(--accent-red);">${error.message}</p>`);
+    if (incomplete.length === 0) {
+        showPlannerOutput("All Done!", `<p>You've completed all topics! Focus on quizzes and review.</p>`);
+        btn.disabled = false;
+        return;
     }
 
+    // Sort topics by certification priority and difficulty
+    const certPriority = Object.entries(summary.byCert)
+        .sort((a, b) => a[1].percent - b[1].percent)
+        .map(([cert]) => cert);
+
+    const sortedTopics = [...incomplete].sort((a, b) => {
+        const aPriority = certPriority.indexOf(a.cert);
+        const bPriority = certPriority.indexOf(b.cert);
+        if (aPriority !== bPriority) return aPriority - bPriority;
+        return DIFFICULTY_WEIGHTS[a.difficulty] - DIFFICULTY_WEIGHTS[b.difficulty];
+    });
+
+    // Generate weekly plan
+    const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const today = new Date();
+    let html = `<div style="margin-bottom: 20px; padding: 15px; background: var(--bg-tertiary); border-radius: 10px;">
+        <p><strong>Weekly Plan Generated</strong></p>
+        <p style="color: var(--text-muted);">Prioritizing ${certPriority[0]} certification · ${incomplete.length} topics remaining</p>
+    </div>`;
+
+    let topicIndex = 0;
+    for (let i = 0; i < 7 && topicIndex < sortedTopics.length; i++) {
+        const date = new Date(today);
+        date.setDate(today.getDate() + i);
+        const dayName = dayNames[date.getDay()];
+        const isWeekend = date.getDay() === 0 || date.getDay() === 6;
+        const topicsForDay = isWeekend ? 2 : 3;
+
+        const dayTopics = sortedTopics.slice(topicIndex, topicIndex + topicsForDay);
+        topicIndex += topicsForDay;
+
+        html += `<div style="margin-bottom: 15px;">
+            <strong>${dayName}</strong> ${isWeekend ? '(Light day)' : ''}
+            <ul style="margin: 8px 0 0 20px; color: var(--text-secondary);">
+                ${dayTopics.map(t => `<li>${t.name} <small>(${t.cert})</small></li>`).join('')}
+            </ul>
+        </div>`;
+    }
+
+    html += `<div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid var(--border-color);">
+        <button class="ai-btn secondary" onclick="autoPopulateWeek()">
+            <span>📥</span> Auto-fill Weekly Planner
+        </button>
+    </div>`;
+
+    showPlannerOutput('Your Weekly Study Plan', html);
     btn.disabled = false;
 }
 
-async function getStudyAdvice() {
+function getStudyAdvice() {
     const btn = document.getElementById('ai-advice-btn');
     btn.disabled = true;
 
-    try {
-        showAILoading('Getting personalized study advice...');
+    const summary = getProgressSummary();
+    const incomplete = getIncompleteTopics();
 
-        const summary = getProgressSummary();
-        const incomplete = getIncompleteTopics();
+    // Generate smart advice based on progress
+    const tips = [];
+    const lowestCert = Object.entries(summary.byCert)
+        .sort((a, b) => a[1].percent - b[1].percent)[0];
+    const highestCert = Object.entries(summary.byCert)
+        .sort((a, b) => b[1].percent - a[1].percent)[0];
 
-        const prompt = `<s>[INST] You are an expert ServiceNow certification coach. Give brief, actionable study advice.
-
-Student Status:
-- Overall: ${summary.percent}% complete
-- CSA: ${summary.byCert.CSA.percent}% (${summary.byCert.CSA.completed}/${summary.byCert.CSA.total})
-- CAD: ${summary.byCert.CAD.percent}% (${summary.byCert.CAD.completed}/${summary.byCert.CAD.total})
-- CIS-ITSM: ${summary.byCert['CIS-ITSM'].percent}% (${summary.byCert['CIS-ITSM'].completed}/${summary.byCert['CIS-ITSM'].total})
-- Topics remaining: ${incomplete.length}
-
-Give 3-4 specific, actionable tips for this student. Consider:
-1. Which certification to prioritize
-2. Study techniques for ServiceNow
-3. Time management advice
-4. Resources to use
-
-Be encouraging but practical. Keep it concise. [/INST]</s>`;
-
-        const aiResponse = await callHuggingFace(prompt);
-
-        if (aiResponse) {
-            showAIOutput('Personalized Study Advice', `<div style="white-space: pre-wrap; line-height: 1.7;">${aiResponse}</div>`);
-        }
-    } catch (error) {
-        showAIOutput('Error', `<p style="color: var(--accent-red);">${error.message}</p>`);
+    // Tip 1: Which cert to prioritize
+    if (lowestCert[1].percent < 50) {
+        tips.push(`<strong>Focus on ${lowestCert[0]}</strong> - It's your lowest at ${lowestCert[1].percent}%. Complete fundamentals before moving to harder certs.`);
+    } else {
+        tips.push(`<strong>Great progress on ${highestCert[0]}!</strong> You're at ${highestCert[1].percent}%. Consider finishing it before context-switching.`);
     }
 
+    // Tip 2: Difficulty advice
+    const easyRemaining = incomplete.filter(t => t.difficulty === 'easy').length;
+    const hardRemaining = incomplete.filter(t => t.difficulty === 'hard').length;
+    if (easyRemaining > 10) {
+        tips.push(`<strong>Build your foundation</strong> - You have ${easyRemaining} easy topics left. Master these for quick wins and confidence.`);
+    } else if (hardRemaining > 5) {
+        tips.push(`<strong>Ready for advanced topics</strong> - Most basics done! Tackle the ${hardRemaining} hard topics with focused 30-min sessions.`);
+    }
+
+    // Tip 3: Study technique
+    tips.push(`<strong>Use the Pomodoro timer</strong> - 25-minute focused sessions with 5-minute breaks. Aim for 4 sessions daily.`);
+
+    // Tip 4: Resources
+    tips.push(`<strong>Practice on a PDI</strong> - Get your free Personal Developer Instance from developer.servicenow.com to apply what you learn.`);
+
+    // Tip 5: Progress-based encouragement
+    if (summary.percent < 25) {
+        tips.push(`<strong>You're just getting started!</strong> Consistency beats intensity. Even 30 mins/day compounds over time.`);
+    } else if (summary.percent >= 75) {
+        tips.push(`<strong>Almost there!</strong> At ${summary.percent}%, focus on weak areas and take practice exams.`);
+    }
+
+    const html = `<div style="line-height: 1.8;">
+        ${tips.map((tip, i) => `<p style="margin-bottom: 15px;">${i + 1}. ${tip}</p>`).join('')}
+    </div>`;
+
+    showPlannerOutput('Study Advice', html);
     btn.disabled = false;
 }
 
-function addAIGoal(goalText) {
+function addSmartGoal(goalText) {
     dailyGoals.push({ text: goalText, completed: false });
     saveDailyGoals();
     renderDailyGoals();
@@ -2284,7 +2280,7 @@ function autoPopulateWeek() {
 
     saveWeeklyPlan();
     renderWeeklyPlan();
-    alert('Weekly planner populated with AI suggestions!');
+    alert('Weekly planner populated with smart suggestions!');
 }
 
 // ==================== INITIALIZATION ====================
