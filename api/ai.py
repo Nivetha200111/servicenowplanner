@@ -1,45 +1,61 @@
-from flask import Flask, request, jsonify
-import requests
+from http.server import BaseHTTPRequestHandler
+import json
+import urllib.request
+import urllib.error
 
-app = Flask(__name__)
+class handler(BaseHTTPRequestHandler):
+    def do_POST(self):
+        try:
+            content_length = int(self.headers['Content-Length'])
+            post_data = self.rfile.read(content_length)
+            data = json.loads(post_data.decode('utf-8'))
 
-@app.route('/api/ai', methods=['POST'])
-def ai_proxy():
-    """Proxy requests to Hugging Face API to avoid CORS issues"""
-    try:
-        data = request.get_json()
-        token = data.get('token')
-        prompt = data.get('prompt')
+            token = data.get('token')
+            prompt = data.get('prompt')
 
-        if not token or not prompt:
-            return jsonify({'error': 'Missing token or prompt'}), 400
+            if not token or not prompt:
+                self.send_response(400)
+                self.send_header('Content-type', 'application/json')
+                self.end_headers()
+                self.wfile.write(json.dumps({'error': 'Missing token or prompt'}).encode())
+                return
 
-        response = requests.post(
-            'https://router.huggingface.co/hf-inference/models/mistralai/Mixtral-8x7B-Instruct-v0.1',
-            headers={
-                'Authorization': f'Bearer {token}',
-                'Content-Type': 'application/json'
-            },
-            json={
+            # Call Hugging Face API
+            req_data = json.dumps({
                 'inputs': prompt,
                 'parameters': {
                     'max_new_tokens': 500,
                     'temperature': 0.7,
                     'return_full_text': False
                 }
-            },
-            timeout=60
-        )
+            }).encode('utf-8')
 
-        if not response.ok:
-            return jsonify({'error': response.text}), response.status_code
+            req = urllib.request.Request(
+                'https://router.huggingface.co/hf-inference/models/mistralai/Mixtral-8x7B-Instruct-v0.1',
+                data=req_data,
+                headers={
+                    'Authorization': f'Bearer {token}',
+                    'Content-Type': 'application/json'
+                }
+            )
 
-        result = response.json()
-        generated_text = result[0].get('generated_text', '') if result else ''
+            with urllib.request.urlopen(req, timeout=60) as response:
+                result = json.loads(response.read().decode('utf-8'))
+                generated_text = result[0].get('generated_text', '') if result else ''
 
-        return jsonify({'text': generated_text})
+                self.send_response(200)
+                self.send_header('Content-type', 'application/json')
+                self.end_headers()
+                self.wfile.write(json.dumps({'text': generated_text}).encode())
 
-    except requests.Timeout:
-        return jsonify({'error': 'Request timed out. The AI model may be loading, please try again.'}), 504
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        except urllib.error.HTTPError as e:
+            error_body = e.read().decode('utf-8')
+            self.send_response(e.code)
+            self.send_header('Content-type', 'application/json')
+            self.end_headers()
+            self.wfile.write(json.dumps({'error': error_body}).encode())
+        except Exception as e:
+            self.send_response(500)
+            self.send_header('Content-type', 'application/json')
+            self.end_headers()
+            self.wfile.write(json.dumps({'error': str(e)}).encode())

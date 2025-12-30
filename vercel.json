@@ -16,12 +16,12 @@
   ],
   "routes": [
     {
-      "src": "/api/ai",
-      "dest": "/api/ai.py"
-    },
-    {
       "src": "/static/(.*)",
       "dest": "/static/$1"
+    },
+    {
+      "src": "/api/ai",
+      "dest": "/api/ai.py"
     },
     {
       "src": "/(.*)",
