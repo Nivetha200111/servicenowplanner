@@ -441,11 +441,10 @@
 
         .topic-list {
             padding: 0;
-            display: none;
         }
 
-        .topic-list.expanded {
-            display: block;
+        .topic-list.collapsed {
+            display: none;
         }
 
         .topic-item {
@@ -2259,7 +2258,7 @@
         function toggleSection(sectionId) {
             const topicList = document.getElementById(`topics-${sectionId}`);
             if (topicList) {
-                topicList.classList.toggle('expanded');
+                topicList.classList.toggle('collapsed');
             }
         }
 
