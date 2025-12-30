@@ -1906,7 +1906,7 @@ async function saveToCloud() {
         updated_at: new Date().toISOString()
     };
 
-    const { error } = await supabase
+    const { error } = await supabaseClient
         .from('user_data')
         .upsert(userData, { onConflict: 'user_id' });
 
@@ -1919,7 +1919,7 @@ async function loadFromCloud() {
     if (!supabaseClient || !currentUser) return;
 
     try {
-        const { data, error } = await supabase
+        const { data, error } = await supabaseClient
             .from('user_data')
             .select('*')
             .eq('user_id', currentUser.id)
