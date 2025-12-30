@@ -4070,6 +4070,12 @@
 
             if (url && key) {
                 initSupabase(url, key);
+            } else {
+                // No config saved - show auth overlay for new users
+                const skipped = localStorage.getItem('snowprep-auth-skipped');
+                if (!skipped) {
+                    showAuthOverlay();
+                }
             }
         }
 
