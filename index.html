@@ -2055,7 +2055,7 @@
 
             <h2 class="section-title">Your Certification Progress</h2>
             <div class="cert-progress-grid animate-in">
-                <div class="cert-progress-card" onclick="navigateTo('csa')">
+                <div class="cert-progress-card" data-nav="csa">
                     <div class="cert-progress-header">
                         <div class="cert-icon csa">CSA</div>
                         <div class="cert-info">
@@ -2072,7 +2072,7 @@
                     </div>
                 </div>
 
-                <div class="cert-progress-card" onclick="navigateTo('cad')">
+                <div class="cert-progress-card" data-nav="cad">
                     <div class="cert-progress-header">
                         <div class="cert-icon cad">CAD</div>
                         <div class="cert-info">
@@ -2089,7 +2089,7 @@
                     </div>
                 </div>
 
-                <div class="cert-progress-card" onclick="navigateTo('cis-itsm')">
+                <div class="cert-progress-card" data-nav="cis-itsm">
                     <div class="cert-progress-header">
                         <div class="cert-icon cis">CIS</div>
                         <div class="cert-info">
@@ -4125,7 +4125,6 @@
 
         function showAuthOverlay() {
             document.getElementById('auth-overlay')?.classList.add('active');
-            loadSupabaseConfig();
         }
 
         function hideAuthOverlay() {
@@ -4747,6 +4746,13 @@ Be encouraging but practical. Keep it concise. [/INST]</s>`;
                 document.querySelectorAll('.nav-item').forEach(item => {
                     item.addEventListener('click', function() {
                         navigateTo(this.dataset.page);
+                    });
+                });
+
+                // Cert progress card clicks
+                document.querySelectorAll('.cert-progress-card[data-nav]').forEach(card => {
+                    card.addEventListener('click', function() {
+                        navigateTo(this.dataset.nav);
                     });
                 });
 
