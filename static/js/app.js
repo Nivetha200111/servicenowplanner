@@ -2054,29 +2054,24 @@ async function callHuggingFace(prompt) {
         return null;
     }
 
-    const response = await fetch('https://api-inference.huggingface.co/models/mistralai/Mixtral-8x7B-Instruct-v0.1', {
+    const response = await fetch('/api/ai', {
         method: 'POST',
         headers: {
-            'Authorization': `Bearer ${hfToken}`,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            inputs: prompt,
-            parameters: {
-                max_new_tokens: 500,
-                temperature: 0.7,
-                return_full_text: false
-            }
+            token: hfToken,
+            prompt: prompt
         })
     });
 
+    const result = await response.json();
+
     if (!response.ok) {
-        const error = await response.text();
-        throw new Error(`API Error: ${error}`);
+        throw new Error(result.error || 'API Error');
     }
 
-    const result = await response.json();
-    return result[0]?.generated_text || '';
+    return result.text || '';
 }
 
 function showAILoading(message) {
