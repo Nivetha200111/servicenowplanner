@@ -18,7 +18,7 @@ def index():
 def serve_static(filename):
     return send_from_directory(app.static_folder, filename)
 
-@app.route('/api/ai', methods=['POST'])
+@app.route('/api/index', methods=['POST'])
 def ai_proxy():
     """Proxy requests to Hugging Face API to avoid CORS issues"""
     try:
