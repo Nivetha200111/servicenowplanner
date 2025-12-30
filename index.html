@@ -999,6 +999,387 @@
         ::-webkit-scrollbar-thumb:hover {
             background: var(--text-muted);
         }
+
+        /* Planner Styles */
+        .planner-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 900px) {
+            .planner-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Pomodoro Timer */
+        .timer-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .timer-display {
+            font-size: 5rem;
+            font-weight: 700;
+            font-family: 'Courier New', monospace;
+            margin: 30px 0;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .timer-label {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .timer-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .timer-btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .timer-btn.primary {
+            background: var(--accent-green);
+            color: white;
+        }
+
+        .timer-btn.primary:hover {
+            background: #0ea572;
+        }
+
+        .timer-btn.secondary {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+
+        .timer-btn.secondary:hover {
+            background: var(--border-color);
+        }
+
+        .timer-btn.danger {
+            background: var(--accent-red);
+            color: white;
+        }
+
+        .timer-sessions {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .session-stat {
+            text-align: center;
+        }
+
+        .session-stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+        }
+
+        .session-stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        /* Daily Goals */
+        .goals-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 25px;
+        }
+
+        .goals-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .goals-header h3 {
+            font-size: 1.1rem;
+        }
+
+        .goals-date {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .goals-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .goal-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            background: var(--bg-tertiary);
+            transition: all 0.2s;
+        }
+
+        .goal-item:hover {
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .goal-item.completed {
+            opacity: 0.6;
+        }
+
+        .goal-item.completed .goal-text {
+            text-decoration: line-through;
+        }
+
+        .goal-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border-color);
+            border-radius: 50%;
+            margin-right: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .goal-checkbox.checked {
+            background: var(--accent-green);
+            border-color: var(--accent-green);
+        }
+
+        .goal-checkbox svg {
+            width: 12px;
+            height: 12px;
+            fill: white;
+            opacity: 0;
+        }
+
+        .goal-checkbox.checked svg {
+            opacity: 1;
+        }
+
+        .goal-text {
+            flex: 1;
+            font-size: 0.95rem;
+        }
+
+        .goal-remove {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 5px;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .goal-item:hover .goal-remove {
+            opacity: 1;
+        }
+
+        .goal-remove:hover {
+            color: var(--accent-red);
+        }
+
+        .add-goal-form {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .add-goal-form input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+
+        .add-goal-form input:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+        }
+
+        .add-goal-form button {
+            padding: 10px 20px;
+            background: var(--accent-blue);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        /* Study Reminders */
+        .reminders-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 25px;
+        }
+
+        .reminder-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            border-radius: 10px;
+            background: var(--bg-tertiary);
+            margin-bottom: 10px;
+        }
+
+        .reminder-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .reminder-time {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+        }
+
+        .reminder-label {
+            color: var(--text-secondary);
+        }
+
+        .reminder-toggle {
+            width: 50px;
+            height: 26px;
+            background: var(--border-color);
+            border-radius: 13px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .reminder-toggle.active {
+            background: var(--accent-green);
+        }
+
+        .reminder-toggle::after {
+            content: '';
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            background: white;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: all 0.2s;
+        }
+
+        .reminder-toggle.active::after {
+            left: 26px;
+        }
+
+        /* Weekly Planner */
+        .planner-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 25px;
+            grid-column: 1 / -1;
+        }
+
+        .week-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .day-column {
+            background: var(--bg-tertiary);
+            border-radius: 10px;
+            padding: 15px 10px;
+            min-height: 200px;
+        }
+
+        .day-header {
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 10px;
+        }
+
+        .day-name {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .day-date {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .day-column.today .day-date {
+            color: var(--accent-cyan);
+        }
+
+        .day-topics {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .day-topic {
+            font-size: 0.8rem;
+            padding: 8px;
+            background: rgba(59, 130, 246, 0.15);
+            border-radius: 6px;
+            color: var(--text-secondary);
+            cursor: pointer;
+        }
+
+        .day-topic:hover {
+            background: rgba(59, 130, 246, 0.25);
+        }
+
+        .day-topic.completed {
+            background: rgba(16, 185, 129, 0.15);
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+
+        @media (max-width: 900px) {
+            .week-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
     </style>
 </head>
 <body>
@@ -1045,6 +1426,10 @@
             </div>
             <div class="nav-section">
                 <div class="nav-section-title">Tools</div>
+                <div class="nav-item" data-page="planner">
+                    <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM9 10H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm-8 4H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z"/></svg>
+                    Planner
+                </div>
                 <div class="nav-item" data-page="notes">
                     <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
                     Notes
@@ -1315,6 +1700,99 @@
                         <h3>Developer Learning</h3>
                         <p>Hands-on labs and learning content for developers.</p>
                     </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Planner Page -->
+        <div class="page" id="page-planner">
+            <div class="study-header">
+                <div>
+                    <h2>Study Planner</h2>
+                    <p style="color: var(--text-muted); margin-top: 5px;">Plan your study sessions and stay on track</p>
+                </div>
+            </div>
+
+            <div class="planner-grid">
+                <!-- Pomodoro Timer -->
+                <div class="timer-card">
+                    <div class="timer-label" id="timer-mode">Focus Time</div>
+                    <div class="timer-display" id="timer-display">25:00</div>
+                    <div class="timer-controls">
+                        <button class="timer-btn primary" id="timer-start" onclick="toggleTimer()">Start</button>
+                        <button class="timer-btn secondary" onclick="resetTimer()">Reset</button>
+                        <button class="timer-btn secondary" onclick="skipTimer()">Skip</button>
+                    </div>
+                    <div class="timer-sessions">
+                        <div class="session-stat">
+                            <div class="session-stat-value" id="sessions-today">0</div>
+                            <div class="session-stat-label">Sessions Today</div>
+                        </div>
+                        <div class="session-stat">
+                            <div class="session-stat-value" id="focus-time-today">0m</div>
+                            <div class="session-stat-label">Focus Time</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Daily Goals -->
+                <div class="goals-card">
+                    <div class="goals-header">
+                        <h3>Today's Goals</h3>
+                        <span class="goals-date" id="goals-date"></span>
+                    </div>
+                    <div class="goals-list" id="goals-list">
+                        <!-- Goals will be rendered here -->
+                    </div>
+                    <form class="add-goal-form" onsubmit="addGoal(event)">
+                        <input type="text" id="new-goal-input" placeholder="Add a study goal..." required>
+                        <button type="submit">Add</button>
+                    </form>
+                </div>
+
+                <!-- Study Reminders -->
+                <div class="reminders-card">
+                    <div class="goals-header">
+                        <h3>Study Reminders</h3>
+                        <button class="btn btn-secondary" style="padding: 8px 15px; font-size: 0.85rem;" onclick="requestNotificationPermission()">Enable Notifications</button>
+                    </div>
+                    <div id="reminders-list">
+                        <div class="reminder-item">
+                            <div class="reminder-info">
+                                <span class="reminder-time">09:00</span>
+                                <span class="reminder-label">Morning Study</span>
+                            </div>
+                            <div class="reminder-toggle" data-reminder="morning" onclick="toggleReminder('morning')"></div>
+                        </div>
+                        <div class="reminder-item">
+                            <div class="reminder-info">
+                                <span class="reminder-time">14:00</span>
+                                <span class="reminder-label">Afternoon Review</span>
+                            </div>
+                            <div class="reminder-toggle" data-reminder="afternoon" onclick="toggleReminder('afternoon')"></div>
+                        </div>
+                        <div class="reminder-item">
+                            <div class="reminder-info">
+                                <span class="reminder-time">19:00</span>
+                                <span class="reminder-label">Evening Practice</span>
+                            </div>
+                            <div class="reminder-toggle" data-reminder="evening" onclick="toggleReminder('evening')"></div>
+                        </div>
+                    </div>
+                    <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 15px;">
+                        Note: Keep this tab open for reminders to work
+                    </p>
+                </div>
+
+                <!-- Weekly Planner -->
+                <div class="planner-card">
+                    <div class="goals-header">
+                        <h3>Weekly Plan</h3>
+                        <button class="btn btn-secondary" style="padding: 8px 15px; font-size: 0.85rem;" onclick="openScheduleTopicModal()">+ Schedule Topic</button>
+                    </div>
+                    <div class="week-grid" id="week-grid">
+                        <!-- Week days will be rendered here -->
+                    </div>
                 </div>
             </div>
         </div>
@@ -2034,9 +2512,15 @@
                 'cad': 'CAD Certification',
                 'cis-itsm': 'CIS-ITSM Certification',
                 'notes': 'My Notes',
-                'resources': 'Resources'
+                'resources': 'Resources',
+                'planner': 'Study Planner'
             };
             document.getElementById('page-title').textContent = titles[page] || 'Dashboard';
+
+            // Initialize planner if navigating to it
+            if (page === 'planner') {
+                initPlanner();
+            }
 
             saveState();
         }
@@ -2558,6 +3042,428 @@
             document.getElementById('sidebar').classList.toggle('open');
         }
 
+        // ==================== PLANNER FEATURES ====================
+
+        // Pomodoro Timer
+        let timerState = {
+            minutes: 25,
+            seconds: 0,
+            isRunning: false,
+            isBreak: false,
+            interval: null,
+            sessionsToday: 0,
+            focusMinutesToday: 0,
+            lastSessionDate: null
+        };
+
+        function loadTimerState() {
+            const saved = localStorage.getItem('snowprep-timer');
+            if (saved) {
+                const parsed = JSON.parse(saved);
+                // Reset if it's a new day
+                const today = new Date().toDateString();
+                if (parsed.lastSessionDate !== today) {
+                    parsed.sessionsToday = 0;
+                    parsed.focusMinutesToday = 0;
+                }
+                timerState = { ...timerState, ...parsed };
+            }
+            updateTimerDisplay();
+            updateSessionStats();
+        }
+
+        function saveTimerState() {
+            timerState.lastSessionDate = new Date().toDateString();
+            localStorage.setItem('snowprep-timer', JSON.stringify(timerState));
+        }
+
+        function updateTimerDisplay() {
+            const display = document.getElementById('timer-display');
+            const mode = document.getElementById('timer-mode');
+            const btn = document.getElementById('timer-start');
+
+            if (display) {
+                display.textContent = `${String(timerState.minutes).padStart(2, '0')}:${String(timerState.seconds).padStart(2, '0')}`;
+            }
+            if (mode) {
+                mode.textContent = timerState.isBreak ? 'Break Time' : 'Focus Time';
+            }
+            if (btn) {
+                btn.textContent = timerState.isRunning ? 'Pause' : 'Start';
+                btn.classList.toggle('danger', timerState.isRunning);
+                btn.classList.toggle('primary', !timerState.isRunning);
+            }
+        }
+
+        function updateSessionStats() {
+            const sessions = document.getElementById('sessions-today');
+            const focusTime = document.getElementById('focus-time-today');
+
+            if (sessions) sessions.textContent = timerState.sessionsToday;
+            if (focusTime) focusTime.textContent = `${timerState.focusMinutesToday}m`;
+        }
+
+        function toggleTimer() {
+            if (timerState.isRunning) {
+                pauseTimer();
+            } else {
+                startTimer();
+            }
+        }
+
+        function startTimer() {
+            timerState.isRunning = true;
+            updateTimerDisplay();
+
+            timerState.interval = setInterval(() => {
+                if (timerState.seconds === 0) {
+                    if (timerState.minutes === 0) {
+                        // Timer complete
+                        completeTimer();
+                        return;
+                    }
+                    timerState.minutes--;
+                    timerState.seconds = 59;
+                } else {
+                    timerState.seconds--;
+                }
+
+                if (!timerState.isBreak) {
+                    // Track focus time every minute
+                    if (timerState.seconds === 0) {
+                        timerState.focusMinutesToday++;
+                        updateSessionStats();
+                        saveTimerState();
+                    }
+                }
+
+                updateTimerDisplay();
+            }, 1000);
+        }
+
+        function pauseTimer() {
+            timerState.isRunning = false;
+            clearInterval(timerState.interval);
+            updateTimerDisplay();
+            saveTimerState();
+        }
+
+        function resetTimer() {
+            pauseTimer();
+            timerState.minutes = timerState.isBreak ? 5 : 25;
+            timerState.seconds = 0;
+            updateTimerDisplay();
+        }
+
+        function skipTimer() {
+            pauseTimer();
+            timerState.isBreak = !timerState.isBreak;
+            timerState.minutes = timerState.isBreak ? 5 : 25;
+            timerState.seconds = 0;
+            updateTimerDisplay();
+        }
+
+        function completeTimer() {
+            pauseTimer();
+
+            if (!timerState.isBreak) {
+                // Completed a focus session
+                timerState.sessionsToday++;
+                updateSessionStats();
+                saveTimerState();
+
+                // Show notification
+                if (Notification.permission === 'granted') {
+                    new Notification('Focus Session Complete!', {
+                        body: 'Great work! Time for a 5-minute break.',
+                        icon: '🎉'
+                    });
+                }
+            } else {
+                // Completed a break
+                if (Notification.permission === 'granted') {
+                    new Notification('Break Over!', {
+                        body: 'Ready for another focus session?',
+                        icon: '💪'
+                    });
+                }
+            }
+
+            // Switch mode
+            timerState.isBreak = !timerState.isBreak;
+            timerState.minutes = timerState.isBreak ? 5 : 25;
+            timerState.seconds = 0;
+            updateTimerDisplay();
+
+            // Play sound
+            playNotificationSound();
+        }
+
+        function playNotificationSound() {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+
+            oscillator.frequency.value = 800;
+            oscillator.type = 'sine';
+            gainNode.gain.value = 0.3;
+
+            oscillator.start();
+            setTimeout(() => oscillator.stop(), 200);
+        }
+
+        // Daily Goals
+        let dailyGoals = [];
+
+        function loadDailyGoals() {
+            const saved = localStorage.getItem('snowprep-goals');
+            if (saved) {
+                const parsed = JSON.parse(saved);
+                const today = new Date().toDateString();
+                if (parsed.date === today) {
+                    dailyGoals = parsed.goals;
+                } else {
+                    dailyGoals = [];
+                }
+            }
+            renderDailyGoals();
+            updateGoalsDate();
+        }
+
+        function saveDailyGoals() {
+            localStorage.setItem('snowprep-goals', JSON.stringify({
+                date: new Date().toDateString(),
+                goals: dailyGoals
+            }));
+        }
+
+        function updateGoalsDate() {
+            const dateEl = document.getElementById('goals-date');
+            if (dateEl) {
+                dateEl.textContent = new Date().toLocaleDateString('en-US', {
+                    weekday: 'long',
+                    month: 'short',
+                    day: 'numeric'
+                });
+            }
+        }
+
+        function renderDailyGoals() {
+            const container = document.getElementById('goals-list');
+            if (!container) return;
+
+            if (dailyGoals.length === 0) {
+                container.innerHTML = '<p style="color: var(--text-muted); text-align: center; padding: 20px;">No goals yet. Add your first goal!</p>';
+                return;
+            }
+
+            container.innerHTML = dailyGoals.map((goal, index) => `
+                <div class="goal-item ${goal.completed ? 'completed' : ''}">
+                    <div class="goal-checkbox ${goal.completed ? 'checked' : ''}" onclick="toggleGoal(${index})">
+                        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                    </div>
+                    <span class="goal-text">${escapeHtml(goal.text)}</span>
+                    <button class="goal-remove" onclick="removeGoal(${index})">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function addGoal(event) {
+            event.preventDefault();
+            const input = document.getElementById('new-goal-input');
+            const text = input.value.trim();
+
+            if (text) {
+                dailyGoals.push({ text, completed: false });
+                saveDailyGoals();
+                renderDailyGoals();
+                input.value = '';
+            }
+        }
+
+        function toggleGoal(index) {
+            dailyGoals[index].completed = !dailyGoals[index].completed;
+            saveDailyGoals();
+            renderDailyGoals();
+        }
+
+        function removeGoal(index) {
+            dailyGoals.splice(index, 1);
+            saveDailyGoals();
+            renderDailyGoals();
+        }
+
+        // Study Reminders
+        let reminders = {
+            morning: false,
+            afternoon: false,
+            evening: false
+        };
+
+        function loadReminders() {
+            const saved = localStorage.getItem('snowprep-reminders');
+            if (saved) {
+                reminders = JSON.parse(saved);
+            }
+            updateReminderToggles();
+            startReminderChecker();
+        }
+
+        function saveReminders() {
+            localStorage.setItem('snowprep-reminders', JSON.stringify(reminders));
+        }
+
+        function updateReminderToggles() {
+            Object.keys(reminders).forEach(key => {
+                const toggle = document.querySelector(`[data-reminder="${key}"]`);
+                if (toggle) {
+                    toggle.classList.toggle('active', reminders[key]);
+                }
+            });
+        }
+
+        function toggleReminder(key) {
+            reminders[key] = !reminders[key];
+            saveReminders();
+            updateReminderToggles();
+        }
+
+        function requestNotificationPermission() {
+            if ('Notification' in window) {
+                Notification.requestPermission().then(permission => {
+                    if (permission === 'granted') {
+                        new Notification('Notifications Enabled!', {
+                            body: 'You will now receive study reminders.'
+                        });
+                    }
+                });
+            } else {
+                alert('Notifications are not supported in this browser.');
+            }
+        }
+
+        function startReminderChecker() {
+            // Check every minute for reminders
+            setInterval(() => {
+                const now = new Date();
+                const hours = now.getHours();
+                const minutes = now.getMinutes();
+
+                if (minutes === 0 && Notification.permission === 'granted') {
+                    if (hours === 9 && reminders.morning) {
+                        new Notification('Morning Study Time!', {
+                            body: 'Start your day with some ServiceNow learning.',
+                            icon: '📚'
+                        });
+                    }
+                    if (hours === 14 && reminders.afternoon) {
+                        new Notification('Afternoon Review!', {
+                            body: 'Time for your afternoon study session.',
+                            icon: '📖'
+                        });
+                    }
+                    if (hours === 19 && reminders.evening) {
+                        new Notification('Evening Practice!', {
+                            body: 'End your day with some practice questions.',
+                            icon: '🎯'
+                        });
+                    }
+                }
+            }, 60000);
+        }
+
+        // Weekly Planner
+        let weeklyPlan = {};
+
+        function loadWeeklyPlan() {
+            const saved = localStorage.getItem('snowprep-weekly');
+            if (saved) {
+                weeklyPlan = JSON.parse(saved);
+            }
+            renderWeeklyPlan();
+        }
+
+        function saveWeeklyPlan() {
+            localStorage.setItem('snowprep-weekly', JSON.stringify(weeklyPlan));
+        }
+
+        function renderWeeklyPlan() {
+            const container = document.getElementById('week-grid');
+            if (!container) return;
+
+            const today = new Date();
+            const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+            // Get start of week (Sunday)
+            const startOfWeek = new Date(today);
+            startOfWeek.setDate(today.getDate() - today.getDay());
+
+            let html = '';
+            for (let i = 0; i < 7; i++) {
+                const date = new Date(startOfWeek);
+                date.setDate(startOfWeek.getDate() + i);
+                const dateStr = date.toISOString().split('T')[0];
+                const isToday = date.toDateString() === today.toDateString();
+                const dayTopics = weeklyPlan[dateStr] || [];
+
+                html += `
+                    <div class="day-column ${isToday ? 'today' : ''}">
+                        <div class="day-header">
+                            <div class="day-name">${dayNames[date.getDay()]}</div>
+                            <div class="day-date">${date.getDate()}</div>
+                        </div>
+                        <div class="day-topics" data-date="${dateStr}">
+                            ${dayTopics.map((topic, idx) => `
+                                <div class="day-topic ${topic.completed ? 'completed' : ''}"
+                                     onclick="toggleWeeklyTopic('${dateStr}', ${idx})">
+                                    ${escapeHtml(topic.name)}
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = html;
+        }
+
+        function toggleWeeklyTopic(dateStr, index) {
+            if (weeklyPlan[dateStr] && weeklyPlan[dateStr][index]) {
+                weeklyPlan[dateStr][index].completed = !weeklyPlan[dateStr][index].completed;
+                saveWeeklyPlan();
+                renderWeeklyPlan();
+            }
+        }
+
+        function openScheduleTopicModal() {
+            // Simple prompt for now
+            const topicName = prompt('Enter topic name to schedule:');
+            if (!topicName) return;
+
+            const dateStr = prompt('Enter date (YYYY-MM-DD) or leave empty for today:');
+            const targetDate = dateStr || new Date().toISOString().split('T')[0];
+
+            if (!weeklyPlan[targetDate]) {
+                weeklyPlan[targetDate] = [];
+            }
+            weeklyPlan[targetDate].push({ name: topicName, completed: false });
+            saveWeeklyPlan();
+            renderWeeklyPlan();
+        }
+
+        // Initialize planner when page loads
+        function initPlanner() {
+            loadTimerState();
+            loadDailyGoals();
+            loadReminders();
+            loadWeeklyPlan();
+        }
+
         // ==================== INITIALIZATION ====================
         document.addEventListener('DOMContentLoaded', function() {
             console.log('SNowPrep: Initializing...');
@@ -2594,6 +3500,9 @@
                 if (state.currentPage) {
                     navigateTo(state.currentPage);
                 }
+
+                // Initialize planner features
+                initPlanner();
 
                 console.log('SNowPrep: Ready!');
             } catch (error) {
