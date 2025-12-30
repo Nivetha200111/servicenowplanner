@@ -1869,19 +1869,19 @@
 
                 <div class="supabase-setup" id="supabase-setup">
                     <h4>Supabase Setup (One-time)</h4>
-                    <input type="text" id="supabase-url" placeholder="Your Supabase URL" onchange="saveSupabaseConfig()">
-                    <input type="text" id="supabase-key" placeholder="Your Supabase Anon Key" onchange="saveSupabaseConfig()">
+                    <input type="text" id="supabase-url" placeholder="Your Supabase URL">
+                    <input type="text" id="supabase-key" placeholder="Your Supabase Anon Key">
                     <small>Get these from <a href="https://supabase.com/dashboard" target="_blank">supabase.com/dashboard</a> → Project Settings → API</small>
                 </div>
 
                 <div class="auth-error" id="auth-error"></div>
 
                 <div class="auth-tabs">
-                    <button class="auth-tab active" onclick="switchAuthTab('login')">Login</button>
-                    <button class="auth-tab" onclick="switchAuthTab('signup')">Sign Up</button>
+                    <button class="auth-tab active" id="login-tab-btn">Login</button>
+                    <button class="auth-tab" id="signup-tab-btn">Sign Up</button>
                 </div>
 
-                <form class="auth-form active" id="login-form" onsubmit="handleLogin(event)">
+                <form class="auth-form active" id="login-form">
                     <div class="auth-input-group">
                         <label for="login-email">Email</label>
                         <input type="email" id="login-email" required placeholder="your@email.com">
@@ -1893,7 +1893,7 @@
                     <button type="submit" class="auth-btn" id="login-btn">Login</button>
                 </form>
 
-                <form class="auth-form" id="signup-form" onsubmit="handleSignup(event)">
+                <form class="auth-form" id="signup-form">
                     <div class="auth-input-group">
                         <label for="signup-email">Email</label>
                         <input type="email" id="signup-email" required placeholder="your@email.com">
@@ -1912,7 +1912,7 @@
                 <div class="auth-divider">or</div>
 
                 <div class="auth-skip">
-                    <button type="button" onclick="skipAuth()">Continue without account (local only)</button>
+                    <button type="button" id="skip-auth-btn">Continue without account (local only)</button>
                 </div>
             </div>
         </div>
@@ -4776,6 +4776,15 @@ Be encouraging but practical. Keep it concise. [/INST]</s>`;
 
                 // Initialize Supabase auth
                 loadSupabaseConfig();
+
+                // Auth event listeners
+                document.getElementById('skip-auth-btn')?.addEventListener('click', skipAuth);
+                document.getElementById('login-tab-btn')?.addEventListener('click', () => switchAuthTab('login'));
+                document.getElementById('signup-tab-btn')?.addEventListener('click', () => switchAuthTab('signup'));
+                document.getElementById('login-form')?.addEventListener('submit', handleLogin);
+                document.getElementById('signup-form')?.addEventListener('submit', handleSignup);
+                document.getElementById('supabase-url')?.addEventListener('change', saveSupabaseConfig);
+                document.getElementById('supabase-key')?.addEventListener('change', saveSupabaseConfig);
 
                 console.log('SNowPrep: Ready!');
             } catch (error) {
