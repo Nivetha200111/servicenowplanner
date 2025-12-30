@@ -2116,7 +2116,7 @@
         function renderSection(section, certId, completedCount, totalCount, progressPercent) {
             return `
                 <div class="topic-section" data-section="${section.id}">
-                    <div class="topic-section-header" onclick="toggleSection('${section.id}')">
+                    <div class="topic-section-header">
                         <div class="topic-section-title">
                             <h3>${section.name}</h3>
                             <span class="topic-section-badge">${certId.toUpperCase()}</span>
@@ -2272,6 +2272,19 @@
         }
 
         function attachTopicListeners() {
+            // Section header toggle
+            document.querySelectorAll('.topic-section-header').forEach(header => {
+                header.addEventListener('click', function() {
+                    const section = this.closest('.topic-section');
+                    const sectionId = section.dataset.section;
+                    const topicList = document.getElementById(`topics-${sectionId}`);
+                    console.log('Clicked section:', sectionId, topicList);
+                    if (topicList) {
+                        topicList.classList.toggle('collapsed');
+                    }
+                });
+            });
+
             // Filter buttons
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
