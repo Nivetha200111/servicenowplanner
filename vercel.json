@@ -6,14 +6,18 @@
       "use": "@vercel/python"
     },
     {
+      "src": "api/ai.py",
+      "use": "@vercel/python"
+    },
+    {
       "src": "static/**/*",
       "use": "@vercel/static"
     }
   ],
   "routes": [
     {
-      "src": "/api/(.*)",
-      "dest": "/api/index.py"
+      "src": "/api/ai",
+      "dest": "/api/ai.py"
     },
     {
       "src": "/static/(.*)",
