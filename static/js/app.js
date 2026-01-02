@@ -788,7 +788,7 @@ function renderTopicItem(topic, certId) {
                 </div>
             </div>
             <div class="topic-actions">
-                ${topic.url ? `<button class="topic-action-btn learn-btn" data-url="${topic.url.replace(/&/g, '&amp;')}" onclick="openLearnResource(this.dataset.url)" title="Learn on Now Learning">Learn</button>` : ''}
+                ${topic.url ? `<button class="topic-action-btn learn-btn" data-url="${topic.url.replace(/&/g, '&amp;')}" title="Learn on Now Learning">Learn</button>` : ''}
                 <button class="topic-action-btn quiz-btn" onclick="startTopicQuiz('${certId}', '${topic.id}')">Quiz</button>
                 <button class="topic-action-btn" onclick="addNoteForTopic('${topic.name}')">Note</button>
             </div>
@@ -914,6 +914,19 @@ function toggleTopic(topicId) {
 }
 
 function attachTopicListeners() {
+    // Learn button clicks
+    document.querySelectorAll('.learn-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const url = this.dataset.url;
+            console.log('Learn button clicked, URL:', url);
+            if (url) {
+                window.open(url, '_blank');
+            }
+        });
+    });
+
     // Section header toggle
     document.querySelectorAll('.topic-section-header').forEach(header => {
         header.addEventListener('click', function() {
