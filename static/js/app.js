@@ -9,71 +9,71 @@ const csaSyllabus = {
             id: 'csa-platform-overview',
             name: 'Platform Overview and Navigation',
             topics: [
-                { id: 'csa-1-1', name: 'ServiceNow Platform Architecture', difficulty: 'easy' },
-                { id: 'csa-1-2', name: 'Instance Overview and Navigation', difficulty: 'easy' },
-                { id: 'csa-1-3', name: 'Application Navigator and Menus', difficulty: 'easy' },
-                { id: 'csa-1-4', name: 'Lists and Forms', difficulty: 'easy' },
-                { id: 'csa-1-5', name: 'User Administration and Roles', difficulty: 'medium' },
-                { id: 'csa-1-6', name: 'Personalizing the Interface', difficulty: 'easy' }
+                { id: 'csa-1-1', name: 'ServiceNow Platform Architecture', difficulty: 'easy', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=platform%20architecture' },
+                { id: 'csa-1-2', name: 'Instance Overview and Navigation', difficulty: 'easy', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=instance%20navigation' },
+                { id: 'csa-1-3', name: 'Application Navigator and Menus', difficulty: 'easy', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=application%20navigator' },
+                { id: 'csa-1-4', name: 'Lists and Forms', difficulty: 'easy', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=lists%20and%20forms' },
+                { id: 'csa-1-5', name: 'User Administration and Roles', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=user%20administration%20roles' },
+                { id: 'csa-1-6', name: 'Personalizing the Interface', difficulty: 'easy', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=personalize%20interface' }
             ]
         },
         {
             id: 'csa-data-management',
             name: 'Data Management',
             topics: [
-                { id: 'csa-2-1', name: 'Tables and Table Schema', difficulty: 'medium' },
-                { id: 'csa-2-2', name: 'Fields and Field Types', difficulty: 'medium' },
-                { id: 'csa-2-3', name: 'Data Dictionary', difficulty: 'medium' },
-                { id: 'csa-2-4', name: 'Import Sets and Transform Maps', difficulty: 'hard' },
-                { id: 'csa-2-5', name: 'CMDB and CI Classes', difficulty: 'hard' },
-                { id: 'csa-2-6', name: 'Data Policies', difficulty: 'medium' }
+                { id: 'csa-2-1', name: 'Tables and Table Schema', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=tables%20schema' },
+                { id: 'csa-2-2', name: 'Fields and Field Types', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=field%20types' },
+                { id: 'csa-2-3', name: 'Data Dictionary', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=data%20dictionary' },
+                { id: 'csa-2-4', name: 'Import Sets and Transform Maps', difficulty: 'hard', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=import%20sets%20transform%20maps' },
+                { id: 'csa-2-5', name: 'CMDB and CI Classes', difficulty: 'hard', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=CMDB%20CI%20classes' },
+                { id: 'csa-2-6', name: 'Data Policies', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=data%20policies' }
             ]
         },
         {
             id: 'csa-ui-configuration',
             name: 'User Interface Configuration',
             topics: [
-                { id: 'csa-3-1', name: 'Form Designer and Form Layout', difficulty: 'medium' },
-                { id: 'csa-3-2', name: 'List Configuration and Filters', difficulty: 'easy' },
-                { id: 'csa-3-3', name: 'UI Policies', difficulty: 'medium' },
-                { id: 'csa-3-4', name: 'UI Actions', difficulty: 'medium' },
-                { id: 'csa-3-5', name: 'Client Scripts Overview', difficulty: 'medium' },
-                { id: 'csa-3-6', name: 'Service Portal Basics', difficulty: 'medium' }
+                { id: 'csa-3-1', name: 'Form Designer and Form Layout', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=form%20designer%20layout' },
+                { id: 'csa-3-2', name: 'List Configuration and Filters', difficulty: 'easy', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=list%20configuration%20filters' },
+                { id: 'csa-3-3', name: 'UI Policies', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=UI%20policies' },
+                { id: 'csa-3-4', name: 'UI Actions', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=UI%20actions' },
+                { id: 'csa-3-5', name: 'Client Scripts Overview', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=client%20scripts' },
+                { id: 'csa-3-6', name: 'Service Portal Basics', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=service%20portal%20basics' }
             ]
         },
         {
             id: 'csa-workflow',
             name: 'Workflow and Automation',
             topics: [
-                { id: 'csa-4-1', name: 'Business Rules', difficulty: 'hard' },
-                { id: 'csa-4-2', name: 'Flow Designer Introduction', difficulty: 'medium' },
-                { id: 'csa-4-3', name: 'Notifications and Email', difficulty: 'medium' },
-                { id: 'csa-4-4', name: 'SLAs and Service Level Management', difficulty: 'hard' },
-                { id: 'csa-4-5', name: 'Scheduled Jobs', difficulty: 'medium' },
-                { id: 'csa-4-6', name: 'Events and Script Includes', difficulty: 'hard' }
+                { id: 'csa-4-1', name: 'Business Rules', difficulty: 'hard', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=business%20rules' },
+                { id: 'csa-4-2', name: 'Flow Designer Introduction', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=flow%20designer' },
+                { id: 'csa-4-3', name: 'Notifications and Email', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=notifications%20email' },
+                { id: 'csa-4-4', name: 'SLAs and Service Level Management', difficulty: 'hard', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=SLA%20service%20level%20management' },
+                { id: 'csa-4-5', name: 'Scheduled Jobs', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=scheduled%20jobs' },
+                { id: 'csa-4-6', name: 'Events and Script Includes', difficulty: 'hard', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=events%20script%20includes' }
             ]
         },
         {
             id: 'csa-self-service',
             name: 'Self-Service and Service Catalog',
             topics: [
-                { id: 'csa-5-1', name: 'Service Catalog Overview', difficulty: 'easy' },
-                { id: 'csa-5-2', name: 'Catalog Items and Variables', difficulty: 'medium' },
-                { id: 'csa-5-3', name: 'Record Producers', difficulty: 'medium' },
-                { id: 'csa-5-4', name: 'Order Guides', difficulty: 'medium' },
-                { id: 'csa-5-5', name: 'Catalog Client Scripts', difficulty: 'hard' },
-                { id: 'csa-5-6', name: 'Knowledge Management', difficulty: 'medium' }
+                { id: 'csa-5-1', name: 'Service Catalog Overview', difficulty: 'easy', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=service%20catalog%20overview' },
+                { id: 'csa-5-2', name: 'Catalog Items and Variables', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=catalog%20items%20variables' },
+                { id: 'csa-5-3', name: 'Record Producers', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=record%20producers' },
+                { id: 'csa-5-4', name: 'Order Guides', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=order%20guides' },
+                { id: 'csa-5-5', name: 'Catalog Client Scripts', difficulty: 'hard', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=catalog%20client%20scripts' },
+                { id: 'csa-5-6', name: 'Knowledge Management', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=knowledge%20management' }
             ]
         },
         {
             id: 'csa-reporting',
             name: 'Reporting and Analytics',
             topics: [
-                { id: 'csa-6-1', name: 'Creating Reports', difficulty: 'easy' },
-                { id: 'csa-6-2', name: 'Report Types and Visualizations', difficulty: 'medium' },
-                { id: 'csa-6-3', name: 'Dashboards and Homepages', difficulty: 'medium' },
-                { id: 'csa-6-4', name: 'Performance Analytics Basics', difficulty: 'hard' },
-                { id: 'csa-6-5', name: 'Scheduled Reports', difficulty: 'easy' }
+                { id: 'csa-6-1', name: 'Creating Reports', difficulty: 'easy', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=creating%20reports' },
+                { id: 'csa-6-2', name: 'Report Types and Visualizations', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=report%20types%20visualizations' },
+                { id: 'csa-6-3', name: 'Dashboards and Homepages', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=dashboards%20homepages' },
+                { id: 'csa-6-4', name: 'Performance Analytics Basics', difficulty: 'hard', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=performance%20analytics' },
+                { id: 'csa-6-5', name: 'Scheduled Reports', difficulty: 'easy', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=scheduled%20reports' }
             ]
         }
     ]
@@ -88,70 +88,70 @@ const cadSyllabus = {
             id: 'cad-scripting',
             name: 'Server-Side Scripting',
             topics: [
-                { id: 'cad-1-1', name: 'GlideRecord and GlideQuery', difficulty: 'hard' },
-                { id: 'cad-1-2', name: 'Business Rules Deep Dive', difficulty: 'hard' },
-                { id: 'cad-1-3', name: 'Script Includes', difficulty: 'hard' },
-                { id: 'cad-1-4', name: 'Scheduled Scripts', difficulty: 'medium' },
-                { id: 'cad-1-5', name: 'Fix Scripts', difficulty: 'medium' },
-                { id: 'cad-1-6', name: 'Background Scripts', difficulty: 'medium' }
+                { id: 'cad-1-1', name: 'GlideRecord and GlideQuery', difficulty: 'hard', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=GlideRecord%20GlideQuery' },
+                { id: 'cad-1-2', name: 'Business Rules Deep Dive', difficulty: 'hard', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=business%20rules%20scripting' },
+                { id: 'cad-1-3', name: 'Script Includes', difficulty: 'hard', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=script%20includes' },
+                { id: 'cad-1-4', name: 'Scheduled Scripts', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=scheduled%20scripts' },
+                { id: 'cad-1-5', name: 'Fix Scripts', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=fix%20scripts' },
+                { id: 'cad-1-6', name: 'Background Scripts', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=background%20scripts' }
             ]
         },
         {
             id: 'cad-client-scripting',
             name: 'Client-Side Scripting',
             topics: [
-                { id: 'cad-2-1', name: 'Client Script Types (onLoad, onChange, onSubmit)', difficulty: 'hard' },
-                { id: 'cad-2-2', name: 'GlideForm (g_form) API', difficulty: 'hard' },
-                { id: 'cad-2-3', name: 'GlideUser (g_user) API', difficulty: 'medium' },
-                { id: 'cad-2-4', name: 'GlideAjax', difficulty: 'hard' },
-                { id: 'cad-2-5', name: 'UI Scripts', difficulty: 'medium' },
-                { id: 'cad-2-6', name: 'Catalog Client Scripts', difficulty: 'hard' }
+                { id: 'cad-2-1', name: 'Client Script Types (onLoad, onChange, onSubmit)', difficulty: 'hard', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=client%20script%20types' },
+                { id: 'cad-2-2', name: 'GlideForm (g_form) API', difficulty: 'hard', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=GlideForm%20g_form%20API' },
+                { id: 'cad-2-3', name: 'GlideUser (g_user) API', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=GlideUser%20g_user%20API' },
+                { id: 'cad-2-4', name: 'GlideAjax', difficulty: 'hard', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=GlideAjax' },
+                { id: 'cad-2-5', name: 'UI Scripts', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=UI%20scripts' },
+                { id: 'cad-2-6', name: 'Catalog Client Scripts', difficulty: 'hard', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=catalog%20client%20scripts' }
             ]
         },
         {
             id: 'cad-integration',
             name: 'Integration and APIs',
             topics: [
-                { id: 'cad-3-1', name: 'REST API Explorer', difficulty: 'medium' },
-                { id: 'cad-3-2', name: 'Scripted REST APIs', difficulty: 'hard' },
-                { id: 'cad-3-3', name: 'Outbound REST Messages', difficulty: 'hard' },
-                { id: 'cad-3-4', name: 'SOAP Web Services', difficulty: 'hard' },
-                { id: 'cad-3-5', name: 'IntegrationHub Basics', difficulty: 'medium' },
-                { id: 'cad-3-6', name: 'MID Server', difficulty: 'medium' }
+                { id: 'cad-3-1', name: 'REST API Explorer', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=REST%20API%20explorer' },
+                { id: 'cad-3-2', name: 'Scripted REST APIs', difficulty: 'hard', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=scripted%20REST%20API' },
+                { id: 'cad-3-3', name: 'Outbound REST Messages', difficulty: 'hard', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=outbound%20REST%20messages' },
+                { id: 'cad-3-4', name: 'SOAP Web Services', difficulty: 'hard', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=SOAP%20web%20services' },
+                { id: 'cad-3-5', name: 'IntegrationHub Basics', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=IntegrationHub' },
+                { id: 'cad-3-6', name: 'MID Server', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=MID%20server' }
             ]
         },
         {
             id: 'cad-app-dev',
             name: 'Application Development',
             topics: [
-                { id: 'cad-4-1', name: 'Application Scope', difficulty: 'medium' },
-                { id: 'cad-4-2', name: 'Studio IDE', difficulty: 'easy' },
-                { id: 'cad-4-3', name: 'Custom Tables and Relationships', difficulty: 'medium' },
-                { id: 'cad-4-4', name: 'Application Menus and Modules', difficulty: 'easy' },
-                { id: 'cad-4-5', name: 'Access Control Lists (ACLs)', difficulty: 'hard' },
-                { id: 'cad-4-6', name: 'Update Sets', difficulty: 'medium' }
+                { id: 'cad-4-1', name: 'Application Scope', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=application%20scope' },
+                { id: 'cad-4-2', name: 'Studio IDE', difficulty: 'easy', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=studio%20IDE' },
+                { id: 'cad-4-3', name: 'Custom Tables and Relationships', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=custom%20tables%20relationships' },
+                { id: 'cad-4-4', name: 'Application Menus and Modules', difficulty: 'easy', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=application%20menus%20modules' },
+                { id: 'cad-4-5', name: 'Access Control Lists (ACLs)', difficulty: 'hard', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=access%20control%20lists%20ACL' },
+                { id: 'cad-4-6', name: 'Update Sets', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=update%20sets' }
             ]
         },
         {
             id: 'cad-flow-designer',
             name: 'Flow Designer and Automation',
             topics: [
-                { id: 'cad-5-1', name: 'Flow Designer Core Components', difficulty: 'medium' },
-                { id: 'cad-5-2', name: 'Subflows and Actions', difficulty: 'hard' },
-                { id: 'cad-5-3', name: 'Custom Actions with Scripts', difficulty: 'hard' },
-                { id: 'cad-5-4', name: 'Decision Tables', difficulty: 'medium' },
-                { id: 'cad-5-5', name: 'Parallel and Loop Actions', difficulty: 'medium' }
+                { id: 'cad-5-1', name: 'Flow Designer Core Components', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=flow%20designer%20components' },
+                { id: 'cad-5-2', name: 'Subflows and Actions', difficulty: 'hard', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=subflows%20actions' },
+                { id: 'cad-5-3', name: 'Custom Actions with Scripts', difficulty: 'hard', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=custom%20actions%20scripts' },
+                { id: 'cad-5-4', name: 'Decision Tables', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=decision%20tables' },
+                { id: 'cad-5-5', name: 'Parallel and Loop Actions', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=parallel%20loop%20actions' }
             ]
         },
         {
             id: 'cad-service-portal',
             name: 'Service Portal Development',
             topics: [
-                { id: 'cad-6-1', name: 'Portal Structure and Themes', difficulty: 'medium' },
-                { id: 'cad-6-2', name: 'Widgets and Widget Development', difficulty: 'hard' },
-                { id: 'cad-6-3', name: 'AngularJS in Service Portal', difficulty: 'hard' },
-                { id: 'cad-6-4', name: 'Server Script and Client Script', difficulty: 'hard' },
-                { id: 'cad-6-5', name: 'Portal Debugging', difficulty: 'medium' }
+                { id: 'cad-6-1', name: 'Portal Structure and Themes', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=service%20portal%20themes' },
+                { id: 'cad-6-2', name: 'Widgets and Widget Development', difficulty: 'hard', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=widget%20development' },
+                { id: 'cad-6-3', name: 'AngularJS in Service Portal', difficulty: 'hard', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=AngularJS%20service%20portal' },
+                { id: 'cad-6-4', name: 'Server Script and Client Script', difficulty: 'hard', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=server%20script%20client%20script' },
+                { id: 'cad-6-5', name: 'Portal Debugging', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=service%20portal%20debugging' }
             ]
         }
     ]
@@ -166,69 +166,69 @@ const cisItsmSyllabus = {
             id: 'cis-incident',
             name: 'Incident Management',
             topics: [
-                { id: 'cis-1-1', name: 'Incident Lifecycle and States', difficulty: 'medium' },
-                { id: 'cis-1-2', name: 'Incident Categorization and Priority', difficulty: 'medium' },
-                { id: 'cis-1-3', name: 'Assignment Rules and Groups', difficulty: 'medium' },
-                { id: 'cis-1-4', name: 'Major Incident Management', difficulty: 'hard' },
-                { id: 'cis-1-5', name: 'Incident SLAs', difficulty: 'hard' },
-                { id: 'cis-1-6', name: 'Incident Notifications', difficulty: 'easy' }
+                { id: 'cis-1-1', name: 'Incident Lifecycle and States', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=incident%20lifecycle%20states' },
+                { id: 'cis-1-2', name: 'Incident Categorization and Priority', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=incident%20categorization%20priority' },
+                { id: 'cis-1-3', name: 'Assignment Rules and Groups', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=assignment%20rules%20groups' },
+                { id: 'cis-1-4', name: 'Major Incident Management', difficulty: 'hard', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=major%20incident%20management' },
+                { id: 'cis-1-5', name: 'Incident SLAs', difficulty: 'hard', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=incident%20SLA' },
+                { id: 'cis-1-6', name: 'Incident Notifications', difficulty: 'easy', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=incident%20notifications' }
             ]
         },
         {
             id: 'cis-problem',
             name: 'Problem Management',
             topics: [
-                { id: 'cis-2-1', name: 'Problem vs Incident', difficulty: 'easy' },
-                { id: 'cis-2-2', name: 'Problem Investigation', difficulty: 'medium' },
-                { id: 'cis-2-3', name: 'Root Cause Analysis', difficulty: 'hard' },
-                { id: 'cis-2-4', name: 'Known Errors and Workarounds', difficulty: 'medium' },
-                { id: 'cis-2-5', name: 'Problem-Incident Relationships', difficulty: 'medium' }
+                { id: 'cis-2-1', name: 'Problem vs Incident', difficulty: 'easy', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=problem%20vs%20incident' },
+                { id: 'cis-2-2', name: 'Problem Investigation', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=problem%20investigation' },
+                { id: 'cis-2-3', name: 'Root Cause Analysis', difficulty: 'hard', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=root%20cause%20analysis' },
+                { id: 'cis-2-4', name: 'Known Errors and Workarounds', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=known%20errors%20workarounds' },
+                { id: 'cis-2-5', name: 'Problem-Incident Relationships', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=problem%20incident%20relationships' }
             ]
         },
         {
             id: 'cis-change',
             name: 'Change Management',
             topics: [
-                { id: 'cis-3-1', name: 'Change Types (Standard, Normal, Emergency)', difficulty: 'medium' },
-                { id: 'cis-3-2', name: 'Change Lifecycle and States', difficulty: 'medium' },
-                { id: 'cis-3-3', name: 'Change Approval Policies', difficulty: 'hard' },
-                { id: 'cis-3-4', name: 'CAB and Change Advisory Board', difficulty: 'medium' },
-                { id: 'cis-3-5', name: 'Change Risk Assessment', difficulty: 'hard' },
-                { id: 'cis-3-6', name: 'Change Conflict Detection', difficulty: 'hard' },
-                { id: 'cis-3-7', name: 'Change Schedules and Blackouts', difficulty: 'medium' }
+                { id: 'cis-3-1', name: 'Change Types (Standard, Normal, Emergency)', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=change%20types%20standard%20normal%20emergency' },
+                { id: 'cis-3-2', name: 'Change Lifecycle and States', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=change%20lifecycle%20states' },
+                { id: 'cis-3-3', name: 'Change Approval Policies', difficulty: 'hard', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=change%20approval%20policies' },
+                { id: 'cis-3-4', name: 'CAB and Change Advisory Board', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=CAB%20change%20advisory%20board' },
+                { id: 'cis-3-5', name: 'Change Risk Assessment', difficulty: 'hard', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=change%20risk%20assessment' },
+                { id: 'cis-3-6', name: 'Change Conflict Detection', difficulty: 'hard', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=change%20conflict%20detection' },
+                { id: 'cis-3-7', name: 'Change Schedules and Blackouts', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=change%20schedules%20blackouts' }
             ]
         },
         {
             id: 'cis-request',
             name: 'Request Management',
             topics: [
-                { id: 'cis-4-1', name: 'Request vs Incident', difficulty: 'easy' },
-                { id: 'cis-4-2', name: 'Service Catalog for ITSM', difficulty: 'medium' },
-                { id: 'cis-4-3', name: 'Request Workflows', difficulty: 'hard' },
-                { id: 'cis-4-4', name: 'Request Approvals', difficulty: 'medium' },
-                { id: 'cis-4-5', name: 'Fulfillment and Task Management', difficulty: 'medium' }
+                { id: 'cis-4-1', name: 'Request vs Incident', difficulty: 'easy', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=request%20vs%20incident' },
+                { id: 'cis-4-2', name: 'Service Catalog for ITSM', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=service%20catalog%20ITSM' },
+                { id: 'cis-4-3', name: 'Request Workflows', difficulty: 'hard', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=request%20workflows' },
+                { id: 'cis-4-4', name: 'Request Approvals', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=request%20approvals' },
+                { id: 'cis-4-5', name: 'Fulfillment and Task Management', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=fulfillment%20task%20management' }
             ]
         },
         {
             id: 'cis-config',
             name: 'Configuration Management',
             topics: [
-                { id: 'cis-5-1', name: 'CMDB Overview', difficulty: 'medium' },
-                { id: 'cis-5-2', name: 'CI Classes and Relationships', difficulty: 'hard' },
-                { id: 'cis-5-3', name: 'Discovery and Service Mapping', difficulty: 'hard' },
-                { id: 'cis-5-4', name: 'CI Lifecycle', difficulty: 'medium' },
-                { id: 'cis-5-5', name: 'Impact Analysis', difficulty: 'hard' }
+                { id: 'cis-5-1', name: 'CMDB Overview', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=CMDB%20overview' },
+                { id: 'cis-5-2', name: 'CI Classes and Relationships', difficulty: 'hard', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=CI%20classes%20relationships' },
+                { id: 'cis-5-3', name: 'Discovery and Service Mapping', difficulty: 'hard', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=discovery%20service%20mapping' },
+                { id: 'cis-5-4', name: 'CI Lifecycle', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=CI%20lifecycle' },
+                { id: 'cis-5-5', name: 'Impact Analysis', difficulty: 'hard', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=impact%20analysis' }
             ]
         },
         {
             id: 'cis-sla',
             name: 'SLA Management',
             topics: [
-                { id: 'cis-6-1', name: 'SLA Definitions', difficulty: 'medium' },
-                { id: 'cis-6-2', name: 'SLA Workflows and Conditions', difficulty: 'hard' },
-                { id: 'cis-6-3', name: 'SLA Timers and Schedules', difficulty: 'hard' },
-                { id: 'cis-6-4', name: 'OLA and Underpinning Contracts', difficulty: 'medium' },
-                { id: 'cis-6-5', name: 'SLA Reporting', difficulty: 'medium' }
+                { id: 'cis-6-1', name: 'SLA Definitions', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=SLA%20definitions' },
+                { id: 'cis-6-2', name: 'SLA Workflows and Conditions', difficulty: 'hard', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=SLA%20workflows%20conditions' },
+                { id: 'cis-6-3', name: 'SLA Timers and Schedules', difficulty: 'hard', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=SLA%20timers%20schedules' },
+                { id: 'cis-6-4', name: 'OLA and Underpinning Contracts', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=OLA%20underpinning%20contracts' },
+                { id: 'cis-6-5', name: 'SLA Reporting', difficulty: 'medium', url: 'https://nowlearning.servicenow.com/lxp?id=search&q=SLA%20reporting' }
             ]
         }
     ]
@@ -788,6 +788,7 @@ function renderTopicItem(topic, certId) {
                 </div>
             </div>
             <div class="topic-actions">
+                ${topic.url ? `<a href="${topic.url}" target="_blank" rel="noopener noreferrer" class="topic-action-btn learn-btn" title="Learn on Now Learning">Learn</a>` : ''}
                 <button class="topic-action-btn quiz-btn" onclick="startTopicQuiz('${certId}', '${topic.id}')">Quiz</button>
                 <button class="topic-action-btn" onclick="addNoteForTopic('${topic.name}')">Note</button>
             </div>
@@ -2317,6 +2318,10 @@ let telegramSettings = {
     dailyReminder: false,
     reminderTime: '09:00'
 };
+const TELEGRAM_POP_KEY = 'snowprep-telegram-pop-schedule';
+const TELEGRAM_REV_KEY = 'snowprep-telegram-revision-schedule';
+const TELEGRAM_PROGRESS_KEY = 'snowprep-telegram-progress-last';
+const TELEGRAM_PROGRESS_TIME = '21:00';
 
 function loadN8nSettings() {
     const saved = localStorage.getItem('snowprep-n8n');
@@ -2733,6 +2738,83 @@ function buildTelegramDailyMessage() {
     return message;
 }
 
+function buildTelegramPopQuizMessage(question, certId) {
+    const optionsText = question.options.map((opt, idx) => {
+        const letter = String.fromCharCode(65 + idx);
+        return `${letter}. ${opt}`;
+    }).join('\n');
+
+    const correctLetter = String.fromCharCode(65 + question.correct);
+
+    let message = '*SNowPrep Pop Quiz*\n';
+    message += `Cert: ${certId.toUpperCase()}\n\n`;
+    message += `${question.question}\n\n`;
+    message += optionsText;
+    message += `\n\nAnswer: ||${correctLetter}||`;
+    message += '\nReply with your choice before revealing!';
+    return message;
+}
+
+function getWeekTopicNames() {
+    const start = new Date();
+    start.setDate(start.getDate() - start.getDay());
+    const names = new Set();
+    for (let i = 0; i < 7; i++) {
+        const date = new Date(start);
+        date.setDate(start.getDate() + i);
+        const dateStr = date.toISOString().split('T')[0];
+        (weeklyPlan[dateStr] || []).forEach(t => names.add((t.name || '').toLowerCase()));
+    }
+    return names;
+}
+
+function buildRevisionMessage() {
+    const weekTopics = getWeekTopicNames();
+    const matchingNote = state.notes.find(n => weekTopics.has((n.title || '').toLowerCase()));
+    const note = matchingNote || state.notes[0];
+
+    if (!note) return null;
+
+    const snippet = (note.content || '').slice(0, 300);
+    let message = '*SNowPrep Revision Card*\n';
+    message += `Topic: ${note.title}\n`;
+    message += `Category: ${note.category}\n\n`;
+    message += `${snippet}${note.content.length > 300 ? '…' : ''}\n\n`;
+    message += 'Take 5 minutes to review and update this note if needed.';
+    return message;
+}
+
+function buildProgressNudgeMessage() {
+    const today = new Date();
+    const todayStr = today.toISOString().split('T')[0];
+    const tomorrow = new Date(today);
+    tomorrow.setDate(today.getDate() + 1);
+    const tomorrowStr = tomorrow.toISOString().split('T')[0];
+
+    const todayTopics = weeklyPlan[todayStr] || [];
+    const tomorrowTopics = weeklyPlan[tomorrowStr] || [];
+    const completedCount = todayTopics.filter(t => t.completed).length;
+    const totalToday = todayTopics.length;
+
+    let message = '*SNowPrep Daily Wrap*\n';
+    message += `Today: ${completedCount}/${totalToday || 0} scheduled topics completed\n`;
+
+    if (tomorrowTopics.length > 0) {
+        message += '\nTomorrow\'s plan:\n';
+        tomorrowTopics.slice(0, 5).forEach((t, i) => {
+            message += `${i + 1}. ${t.name}\n`;
+        });
+        if (tomorrowTopics.length > 5) {
+            message += `...and ${tomorrowTopics.length - 5} more\n`;
+        }
+    } else {
+        message += '\nNo topics scheduled for tomorrow. Add 1–2 quick wins!';
+    }
+
+    message += '\nSmall steps add up—nice work today.';
+    return message;
+}
+
 async function sendTelegramDailyMessage(forceFeedback = false) {
     const success = await sendTelegramMessage(buildTelegramDailyMessage(), forceFeedback);
 
@@ -2744,6 +2826,97 @@ async function sendTelegramDailyMessage(forceFeedback = false) {
     }
 
     return success;
+}
+
+async function sendTelegramPopQuiz() {
+    const summary = getProgressSummary();
+    const lowest = Object.entries(summary.byCert).sort((a, b) => a[1].percent - b[1].percent)[0];
+    const certId = (lowest?.[0] || 'csa').toLowerCase();
+    const pool = quizQuestions[certId] || quizQuestions.csa;
+    if (!pool || pool.length === 0) return false;
+
+    const question = pool[Math.floor(Math.random() * pool.length)];
+    return sendTelegramMessage(buildTelegramPopQuizMessage(question, certId), false);
+}
+
+async function sendTelegramRevisionCard() {
+    const msg = buildRevisionMessage();
+    if (!msg) return false;
+    return sendTelegramMessage(msg, false);
+}
+
+async function sendTelegramProgressNudge() {
+    return sendTelegramMessage(buildProgressNudgeMessage(), false);
+}
+
+function getTodayKey() {
+    return new Date().toDateString();
+}
+
+function formatTime(hours, minutes) {
+    return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
+}
+
+function randomTimeStrings(count, startHour = 10, endHour = 19, minGapMinutes = 90) {
+    const times = [];
+    let attempts = 0;
+    while (times.length < count && attempts < 20) {
+        attempts++;
+        const hour = Math.floor(Math.random() * (endHour - startHour + 1)) + startHour;
+        const minute = Math.floor(Math.random() * 60);
+        const candidate = formatTime(hour, minute);
+
+        const tooClose = times.some(t => {
+            const [h, m] = t.split(':').map(Number);
+            const diff = Math.abs((h * 60 + m) - (hour * 60 + minute));
+            return diff < minGapMinutes;
+        });
+        if (!tooClose) times.push(candidate);
+    }
+    return times;
+}
+
+function ensurePopQuizSchedule() {
+    const todayKey = getTodayKey();
+    const saved = localStorage.getItem(TELEGRAM_POP_KEY);
+    if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed.date === todayKey) return parsed;
+    }
+
+    const count = Math.random() < 0.5 ? 1 : 2;
+    const schedule = {
+        date: todayKey,
+        times: randomTimeStrings(count, 10, 18),
+        sent: []
+    };
+    localStorage.setItem(TELEGRAM_POP_KEY, JSON.stringify(schedule));
+    return schedule;
+}
+
+function savePopQuizSchedule(schedule) {
+    localStorage.setItem(TELEGRAM_POP_KEY, JSON.stringify(schedule));
+}
+
+function ensureRevisionSchedule() {
+    const todayKey = getTodayKey();
+    const saved = localStorage.getItem(TELEGRAM_REV_KEY);
+    if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed.date === todayKey) return parsed;
+    }
+
+    const schedule = {
+        date: todayKey,
+        time: randomTimeStrings(1, 12, 18)[0],
+        sent: false
+    };
+    localStorage.setItem(TELEGRAM_REV_KEY, JSON.stringify(schedule));
+    return schedule;
+}
+
+function saveRevisionSchedule(schedule) {
+    localStorage.setItem(TELEGRAM_REV_KEY, JSON.stringify(schedule));
 }
 
 function buildTelegramWeeklyMessage() {
@@ -2822,20 +2995,25 @@ function scheduleTelegramReminder() {
         clearInterval(telegramReminderInterval);
     }
 
-    telegramReminderInterval = setInterval(() => {
+    telegramReminderInterval = setInterval(async () => {
         if (!telegramSettings.dailyReminder) {
             return;
         }
 
         const now = new Date();
         const currentTime = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+        const todayKey = getTodayKey();
 
+        // Ensure schedules exist for today
+        const popSchedule = ensurePopQuizSchedule();
+        const revSchedule = ensureRevisionSchedule();
+
+        // Morning daily plan + Sunday weekly
         if (currentTime === telegramSettings.reminderTime) {
             const lastSent = localStorage.getItem('snowprep-telegram-last-sent');
-            const today = now.toDateString();
 
-            if (lastSent !== today) {
-                sendTelegramDailyMessage();
+            if (lastSent !== todayKey) {
+                await sendTelegramDailyMessage();
             }
 
             // Send weekly plan every Sunday
@@ -2843,7 +3021,36 @@ function scheduleTelegramReminder() {
                 const weekKey = getStartOfWeekISO(now);
                 const lastWeekly = localStorage.getItem('snowprep-telegram-weekly-last');
                 if (lastWeekly !== weekKey) {
-                    sendTelegramWeeklyMessage();
+                    await sendTelegramWeeklyMessage();
+                }
+            }
+        }
+
+        // Random pop quiz hits
+        if (popSchedule.times.includes(currentTime) && !popSchedule.sent.includes(currentTime)) {
+            const sent = await sendTelegramPopQuiz();
+            if (sent) {
+                popSchedule.sent.push(currentTime);
+                savePopQuizSchedule(popSchedule);
+            }
+        }
+
+        // Revision drop once per day
+        if (revSchedule.time === currentTime && !revSchedule.sent) {
+            const sent = await sendTelegramRevisionCard();
+            if (sent) {
+                revSchedule.sent = true;
+                saveRevisionSchedule(revSchedule);
+            }
+        }
+
+        // Evening progress nudge
+        if (currentTime === TELEGRAM_PROGRESS_TIME) {
+            const lastProgress = localStorage.getItem(TELEGRAM_PROGRESS_KEY);
+            if (lastProgress !== todayKey) {
+                const sent = await sendTelegramProgressNudge();
+                if (sent) {
+                    localStorage.setItem(TELEGRAM_PROGRESS_KEY, todayKey);
                 }
             }
         }

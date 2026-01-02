@@ -529,6 +529,21 @@ body {
     border-color: var(--accent-purple);
 }
 
+.topic-action-btn.learn-btn {
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    background: rgba(0, 200, 150, 0.1);
+    border-color: var(--accent-green);
+    color: var(--accent-green);
+}
+
+.topic-action-btn.learn-btn:hover {
+    background: var(--accent-green);
+    border-color: var(--accent-green);
+    color: white;
+}
+
 /* Quiz Modal */
 .modal-overlay {
     display: none;
