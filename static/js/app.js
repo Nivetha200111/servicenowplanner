@@ -788,7 +788,7 @@ function renderTopicItem(topic, certId) {
                 </div>
             </div>
             <div class="topic-actions">
-                ${topic.url ? `<a href="${topic.url}" target="_blank" rel="noopener noreferrer" class="topic-action-btn learn-btn" title="Learn on Now Learning">Learn</a>` : ''}
+                ${topic.url ? `<button class="topic-action-btn learn-btn" onclick="window.open('${topic.url}', '_blank')" title="Learn on Now Learning">Learn</button>` : ''}
                 <button class="topic-action-btn quiz-btn" onclick="startTopicQuiz('${certId}', '${topic.id}')">Quiz</button>
                 <button class="topic-action-btn" onclick="addNoteForTopic('${topic.name}')">Note</button>
             </div>
