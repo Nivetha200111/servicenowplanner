@@ -13,39 +13,39 @@
         }
 
         :root {
-            /* Y2K Cyber Colors 🌟✨💿 */
-            --bg-primary: linear-gradient(135deg, #00d4ff 0%, #ff006e 50%, #ffbe0b 100%);
-            --bg-secondary: rgba(10, 10, 30, 0.95);
-            --bg-tertiary: rgba(20, 20, 50, 0.85);
-            --bg-card: rgba(255, 255, 255, 0.08);
-            --border-color: rgba(0, 212, 255, 0.4);
+            /* DISCO MIRROR BALL THEME 🪩✨💃 */
+            --bg-primary: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+            --bg-secondary: rgba(0, 0, 0, 0.98);
+            --bg-tertiary: rgba(20, 0, 20, 0.9);
+            --bg-card: rgba(255, 0, 255, 0.05);
+            --border-color: rgba(0, 255, 0, 0.5);
             --text-primary: #ffffff;
-            --text-secondary: #e0f7ff;
-            --text-muted: #8ec5fc;
+            --text-secondary: #f0f0f0;
+            --text-muted: #a0a0a0;
 
-            /* Y2K Accent Colors */
-            --accent-blue: #00d4ff;
-            --accent-green: #00ff88;
-            --accent-yellow: #ffbe0b;
-            --accent-red: #ff006e;
-            --accent-purple: #00d4ff;
-            --accent-pink: #ff006e;
+            /* Disco Neon Colors */
+            --accent-blue: #00ffff;
+            --accent-green: #00ff00;
+            --accent-yellow: #ffff00;
+            --accent-red: #ff0066;
+            --accent-purple: #ff00ff;
+            --accent-pink: #ff0099;
             --accent-cyan: #00ffff;
-            --accent-orange: #ff9500;
+            --accent-orange: #ff6600;
 
-            /* Y2K Chrome Gradients */
-            --gradient-primary: linear-gradient(135deg, #00d4ff 0%, #00ffff 100%);
-            --gradient-success: linear-gradient(135deg, #00ff88 0%, #00d4ff 100%);
-            --gradient-warning: linear-gradient(135deg, #ff006e 0%, #ff9500 100%);
-            --gradient-info: linear-gradient(135deg, #00d4ff 0%, #00ffff 100%);
-            --gradient-cosmic: linear-gradient(135deg, #ff006e 0%, #ffbe0b 50%, #00d4ff 100%);
-            --gradient-sakura: linear-gradient(135deg, #ff006e 0%, #ff9500 50%, #ffbe0b 100%);
-            --gradient-chrome: linear-gradient(135deg, #e0e0e0 0%, #ffffff 25%, #e0e0e0 50%, #ffffff 75%, #e0e0e0 100%);
+            /* Disco Gradients */
+            --gradient-primary: linear-gradient(135deg, #ff00ff 0%, #00ff00 100%);
+            --gradient-success: linear-gradient(135deg, #00ff00 0%, #00ffff 100%);
+            --gradient-warning: linear-gradient(135deg, #ff0099 0%, #ff00ff 100%);
+            --gradient-info: linear-gradient(135deg, #00ffff 0%, #ff00ff 100%);
+            --gradient-cosmic: linear-gradient(135deg, #ff00ff 0%, #00ff00 50%, #00ffff 100%);
+            --gradient-sakura: linear-gradient(135deg, #ff0099 0%, #ff00ff 50%, #ff66ff 100%);
+            --gradient-disco: linear-gradient(45deg, #ff00ff 0%, #00ff00 25%, #00ffff 50%, #ff0099 75%, #ff00ff 100%);
 
             /* Glass Effect */
-            --glass-bg: rgba(255, 255, 255, 0.12);
-            --glass-border: rgba(0, 212, 255, 0.4);
-            --backdrop-blur: blur(15px);
+            --glass-bg: rgba(255, 0, 255, 0.1);
+            --glass-border: rgba(0, 255, 0, 0.4);
+            --backdrop-blur: blur(20px);
         }
 
         @keyframes gradient-shift {
@@ -61,10 +61,10 @@
 
         @keyframes pulse-glow {
             0%, 100% {
-                box-shadow: 0 0 25px rgba(0, 212, 255, 0.6), 0 0 50px rgba(0, 255, 255, 0.4);
+                box-shadow: 0 0 25px rgba(255, 0, 255, 0.8), 0 0 50px rgba(0, 255, 0, 0.6);
             }
             50% {
-                box-shadow: 0 0 40px rgba(0, 212, 255, 0.9), 0 0 80px rgba(0, 255, 255, 0.7);
+                box-shadow: 0 0 40px rgba(255, 0, 255, 1), 0 0 80px rgba(0, 255, 0, 0.9);
             }
         }
 
@@ -120,19 +120,33 @@
 
         @keyframes glow-pulse {
             0%, 100% {
-                text-shadow: 0 0 10px rgba(0, 212, 255, 0.6), 0 0 20px rgba(0, 255, 255, 0.4);
+                text-shadow: 0 0 10px rgba(255, 0, 255, 0.8), 0 0 20px rgba(0, 255, 0, 0.6);
             }
             50% {
-                text-shadow: 0 0 20px rgba(0, 212, 255, 0.9), 0 0 40px rgba(0, 255, 255, 0.7), 0 0 60px rgba(255, 190, 11, 0.5);
+                text-shadow: 0 0 20px rgba(255, 0, 255, 1), 0 0 40px rgba(0, 255, 0, 0.9), 0 0 60px rgba(0, 255, 0, 0.7);
             }
+        }
+
+        @keyframes disco-spin {
+            0% { transform: rotate(0deg); filter: hue-rotate(0deg); }
+            100% { transform: rotate(360deg); filter: hue-rotate(360deg); }
+        }
+
+        @keyframes neon-flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+            75% { opacity: 1; }
+        }
+
+        @keyframes mirror-shine {
+            0%, 100% { background-position: 200% center; }
+            50% { background-position: -200% center; }
         }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: #000814;
-            background: linear-gradient(135deg, #000814 0%, #001d3d 50%, #003566 100%);
-            background-size: 400% 400%;
-            animation: gradient-shift 20s ease infinite;
+            background: #000000;
+            background: radial-gradient(circle at center, #0a0a0a 0%, #000000 100%);
             color: var(--text-primary);
             min-height: 100vh;
             display: flex;
@@ -140,7 +154,7 @@
             overflow-x: hidden;
         }
 
-        /* Y2K Cyber Grid Background 💿✨ */
+        /* Disco Mirror Ball Spotlights 🪩✨ */
         body::before {
             content: '';
             position: fixed;
@@ -149,27 +163,27 @@
             width: 100%;
             height: 100%;
             background-image:
-                radial-gradient(circle at 15% 40%, rgba(0, 212, 255, 0.2) 0%, transparent 50%),
-                radial-gradient(circle at 85% 70%, rgba(255, 0, 110, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 50% 30%, rgba(0, 255, 255, 0.12) 0%, transparent 50%),
-                radial-gradient(circle at 70% 90%, rgba(255, 190, 11, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 30% 80%, rgba(0, 255, 136, 0.12) 0%, transparent 50%);
-            animation: float 25s ease-in-out infinite;
+                radial-gradient(circle at 20% 30%, rgba(255, 0, 255, 0.3) 0%, transparent 40%),
+                radial-gradient(circle at 80% 60%, rgba(0, 255, 0, 0.25) 0%, transparent 40%),
+                radial-gradient(circle at 50% 80%, rgba(0, 255, 0, 0.2) 0%, transparent 40%),
+                radial-gradient(circle at 70% 20%, rgba(255, 0, 153, 0.25) 0%, transparent 40%),
+                radial-gradient(circle at 30% 70%, rgba(0, 255, 0, 0.2) 0%, transparent 40%);
+            animation: disco-spin 30s linear infinite;
             pointer-events: none;
             z-index: 0;
         }
 
-        /* Sparkle overlay */
+        /* Disco Ball overlay */
         body::after {
-            content: '✨';
+            content: '🪩';
             position: fixed;
             top: 10%;
             right: 15%;
-            font-size: 2rem;
-            opacity: 0;
-            animation: sparkle 3s ease-in-out infinite;
+            font-size: 3rem;
+            animation: disco-spin 10s linear infinite, neon-flicker 2s ease-in-out infinite;
             pointer-events: none;
             z-index: 0;
+            filter: drop-shadow(0 0 20px rgba(255, 0, 255, 0.8));
         }
 
         /* Sidebar */
@@ -178,7 +192,7 @@
             background: var(--bg-secondary);
             backdrop-filter: var(--backdrop-blur);
             border-right: 2px solid var(--border-color);
-            box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.3);
             height: 100vh;
             position: fixed;
             left: 0;
@@ -190,7 +204,7 @@
         }
 
         .sidebar:hover {
-            box-shadow: 0 0 40px rgba(0, 212, 255, 0.4), 0 0 60px rgba(0, 255, 255, 0.3);
+            box-shadow: 0 0 40px rgba(255, 0, 255, 0.4), 0 0 60px rgba(0, 255, 0, 0.3);
         }
 
         .logo {
@@ -213,13 +227,13 @@
             font-weight: 700;
             font-size: 18px;
             animation: gradient-shift 8s ease infinite, float 4s ease-in-out infinite;
-            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.5);
+            box-shadow: 0 4px 15px rgba(255, 0, 255, 0.5);
             transition: all 0.3s ease;
         }
 
         .logo-icon:hover {
             transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 6px 25px rgba(0, 212, 255, 0.7), 0 0 40px rgba(0, 255, 255, 0.5);
+            box-shadow: 0 6px 25px rgba(255, 0, 255, 0.7), 0 0 40px rgba(0, 255, 0, 0.5);
         }
 
         .logo-text {
@@ -273,7 +287,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.2), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 255, 0.2), transparent);
             transition: left 0.5s ease;
         }
 
@@ -285,11 +299,11 @@
             background: var(--bg-tertiary);
             color: var(--text-primary);
             transform: translateX(5px);
-            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+            box-shadow: 0 4px 15px rgba(255, 0, 255, 0.3);
         }
 
         .nav-item.active {
-            background: linear-gradient(135deg, rgba(79, 195, 247, 0.2), rgba(0, 255, 255, 0.2));
+            background: linear-gradient(135deg, rgba(79, 195, 247, 0.2), rgba(0, 255, 0, 0.2));
             color: var(--accent-cyan);
             box-shadow: 0 4px 20px rgba(79, 195, 247, 0.3);
             animation: pulse-glow 2s ease-in-out infinite;
@@ -334,7 +348,7 @@
             background: var(--bg-secondary);
             backdrop-filter: var(--backdrop-blur);
             border-bottom: 2px solid var(--border-color);
-            box-shadow: 0 4px 20px rgba(0, 212, 255, 0.1);
+            box-shadow: 0 4px 20px rgba(255, 0, 255, 0.1);
             padding: 15px 30px;
             display: flex;
             justify-content: space-between;
@@ -346,7 +360,7 @@
         }
 
         .header:hover {
-            box-shadow: 0 4px 25px rgba(0, 212, 255, 0.2), 0 0 40px rgba(0, 255, 255, 0.1);
+            box-shadow: 0 4px 25px rgba(255, 0, 255, 0.2), 0 0 40px rgba(0, 255, 0, 0.1);
         }
 
         .header-title {
@@ -403,14 +417,14 @@
             justify-content: center;
             font-weight: 700;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(255, 0, 110, 0.4);
+            box-shadow: 0 4px 15px rgba(255, 0, 153, 0.4);
             transition: all 0.3s ease;
             animation: gradient-shift 4s ease infinite;
         }
 
         .user-avatar:hover {
             transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 6px 25px rgba(255, 0, 110, 0.6), 0 0 40px rgba(0, 255, 255, 0.4);
+            box-shadow: 0 6px 25px rgba(255, 0, 153, 0.6), 0 0 40px rgba(0, 255, 0, 0.4);
         }
 
         /* Page Container */
@@ -451,7 +465,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+            background: linear-gradient(45deg, transparent, rgba(255, 0, 255, 0.1), transparent);
             transform: rotate(45deg);
             transition: all 0.6s ease;
         }
@@ -459,7 +473,7 @@
         .stat-card:hover {
             transform: translateY(-8px) scale(1.02);
             border-color: var(--accent-pink);
-            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.3), 0 0 60px rgba(0, 255, 255, 0.2);
+            box-shadow: 0 10px 40px rgba(255, 0, 255, 0.3), 0 0 60px rgba(0, 255, 0, 0.2);
         }
 
         .stat-card:hover::before {
@@ -547,7 +561,7 @@
         .cert-progress-card:hover {
             border-color: var(--accent-cyan);
             transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 10px 40px rgba(79, 195, 247, 0.4), 0 0 60px rgba(0, 255, 255, 0.3);
+            box-shadow: 0 10px 40px rgba(79, 195, 247, 0.4), 0 0 60px rgba(0, 255, 0, 0.3);
         }
 
         .cert-progress-card:hover::after {
@@ -822,7 +836,7 @@
         .topic-action-btn.quiz-btn:hover {
             background: var(--gradient-primary);
             border-color: var(--accent-purple);
-            box-shadow: 0 6px 20px rgba(0, 255, 255, 0.4);
+            box-shadow: 0 6px 20px rgba(0, 255, 0, 0.4);
         }
 
         .topic-action-btn.learn-btn {
@@ -1046,7 +1060,7 @@
 
         .btn-primary:hover {
             transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 8px 30px rgba(79, 195, 247, 0.6), 0 0 40px rgba(0, 255, 255, 0.4);
+            box-shadow: 0 8px 30px rgba(79, 195, 247, 0.6), 0 0 40px rgba(0, 255, 0, 0.4);
         }
 
         .btn-primary:active {
@@ -1063,7 +1077,7 @@
             background: var(--bg-card);
             border-color: var(--accent-purple);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 255, 255, 0.3);
+            box-shadow: 0 6px 20px rgba(0, 255, 0, 0.3);
         }
 
         /* Quiz Results */
@@ -1372,7 +1386,7 @@
 
         ::-webkit-scrollbar-thumb:hover {
             background: var(--gradient-cosmic);
-            box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+            box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
         }
 
         /* AI Planner Styles */
@@ -1875,8 +1889,8 @@
             </div>
 
             <!-- AI Output -->
-            <div id="ai-output" class="ai-output-hidden" style="background: var(--bg-card); backdrop-filter: var(--backdrop-blur); border: 2px solid var(--border-color); border-radius: 16px; padding: 25px; margin-bottom: 30px; box-shadow: 0 8px 32px rgba(0, 212, 255, 0.3);">
-                <h3 id="ai-output-title" style="margin-bottom: 15px; color: var(--accent-cyan); text-shadow: 0 0 10px rgba(0, 212, 255, 0.6);">✨ AI Recommendations</h3>
+            <div id="ai-output" class="ai-output-hidden" style="background: var(--bg-card); backdrop-filter: var(--backdrop-blur); border: 2px solid var(--border-color); border-radius: 16px; padding: 25px; margin-bottom: 30px; box-shadow: 0 8px 32px rgba(255, 0, 255, 0.3);">
+                <h3 id="ai-output-title" style="margin-bottom: 15px; color: var(--accent-cyan); text-shadow: 0 0 10px rgba(255, 0, 255, 0.6);">✨ AI Recommendations</h3>
                 <div id="ai-output-content" style="color: var(--text-secondary); line-height: 1.8;"></div>
             </div>
 
@@ -2123,7 +2137,7 @@
             </div>
 
             <div class="stat-card" style="max-width: 600px; margin: 40px auto; text-align: center;">
-                <div style="width: 300px; height: 300px; margin: 0 auto 30px; border-radius: 50%; background: var(--gradient-cosmic); background-size: 200% 200%; animation: gradient-shift 5s ease infinite; display: flex; align-items: center; justify-content: center; box-shadow: 0 20px 60px rgba(0, 212, 255, 0.4);">
+                <div style="width: 300px; height: 300px; margin: 0 auto 30px; border-radius: 50%; background: var(--gradient-cosmic); background-size: 200% 200%; animation: gradient-shift 5s ease infinite; display: flex; align-items: center; justify-content: center; box-shadow: 0 20px 60px rgba(255, 0, 255, 0.4);">
                     <div style="width: 280px; height: 280px; border-radius: 50%; background: var(--bg-secondary); display: flex; align-items: center; justify-content: center;">
                         <div id="pomodoro-display" style="font-size: 4rem; font-weight: 700; color: var(--accent-cyan); text-shadow: 0 0 20px rgba(0, 229, 255, 0.6);">25:00</div>
                     </div>
@@ -2298,6 +2312,23 @@
                     startBtn.style.display = 'block';
                     pauseBtn.style.display = 'none';
                 });
+            }
+
+            // Make sure AI output shows when visible class is added
+            const aiOutput = document.getElementById('ai-output');
+            if (aiOutput) {
+                // Watch for class changes
+                const observer = new MutationObserver(function(mutations) {
+                    mutations.forEach(function(mutation) {
+                        if (mutation.attributeName === 'class') {
+                            if (aiOutput.classList.contains('visible')) {
+                                aiOutput.style.display = 'block';
+                                aiOutput.classList.remove('ai-output-hidden');
+                            }
+                        }
+                    });
+                });
+                observer.observe(aiOutput, { attributes: true });
             }
         });
     </script>
