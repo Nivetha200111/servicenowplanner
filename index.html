@@ -2010,8 +2010,46 @@
                     <h2>✨ Flashcards</h2>
                     <p style="color: var(--text-muted); margin-top: 5px;">Master concepts with interactive flashcards</p>
                 </div>
+                <button class="btn btn-primary" onclick="createFlashcard()">+ Create Card</button>
             </div>
-            <div id="flashcards-container"></div>
+
+            <div class="stats-grid" style="margin-bottom: 30px;">
+                <div class="stat-card">
+                    <div class="stat-card-header">
+                        <div class="stat-card-icon blue">📚</div>
+                    </div>
+                    <div class="stat-value" id="total-flashcards">0</div>
+                    <div class="stat-label">Total Cards</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-header">
+                        <div class="stat-card-icon green">✅</div>
+                    </div>
+                    <div class="stat-value" id="mastered-flashcards">0</div>
+                    <div class="stat-label">Mastered</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-header">
+                        <div class="stat-card-icon yellow">📖</div>
+                    </div>
+                    <div class="stat-value" id="learning-flashcards">0</div>
+                    <div class="stat-label">Learning</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-header">
+                        <div class="stat-card-icon purple">🔄</div>
+                    </div>
+                    <div class="stat-value" id="review-flashcards">0</div>
+                    <div class="stat-label">Due Today</div>
+                </div>
+            </div>
+
+            <div class="empty-state">
+                <svg viewBox="0 0 24 24" style="width: 80px; height: 80px; margin-bottom: 20px;"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z" fill="var(--accent-purple)"/></svg>
+                <h3 style="margin-bottom: 10px; color: var(--text-primary);">No Flashcards Yet</h3>
+                <p style="color: var(--text-muted); margin-bottom: 20px;">Create your first flashcard to start learning with spaced repetition!</p>
+                <button class="btn btn-primary" onclick="createFlashcard()">Create First Card</button>
+            </div>
         </div>
 
         <!-- Analytics Page -->
@@ -2022,7 +2060,47 @@
                     <p style="color: var(--text-muted); margin-top: 5px;">Track your learning progress and performance</p>
                 </div>
             </div>
-            <div id="analytics-container"></div>
+
+            <h3 class="section-title" style="margin-bottom: 20px;">📈 Study Time (Last 7 Days)</h3>
+            <div class="stat-card" style="margin-bottom: 40px;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 2.5rem; font-weight: 700; color: var(--accent-cyan); margin-bottom: 5px;" id="total-study-time">0h</div>
+                        <div style="color: var(--text-muted);">Total Time</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2.5rem; font-weight: 700; color: var(--accent-purple); margin-bottom: 5px;" id="avg-study-time">0m</div>
+                        <div style="color: var(--text-muted);">Daily Average</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2.5rem; font-weight: 700; color: var(--accent-pink); margin-bottom: 5px;" id="total-sessions">0</div>
+                        <div style="color: var(--text-muted);">Sessions</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2.5rem; font-weight: 700; color: var(--accent-green); margin-bottom: 5px;" id="completion-rate">0%</div>
+                        <div style="color: var(--text-muted);">Completion Rate</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="section-title" style="margin-bottom: 20px;">🎯 Performance Overview</h3>
+            <div class="cert-progress-grid">
+                <div class="cert-progress-card">
+                    <h4 style="margin-bottom: 15px; color: var(--accent-blue);">Quiz Performance</h4>
+                    <div style="font-size: 3rem; font-weight: 700; text-align: center; margin: 20px 0; color: var(--accent-cyan);" id="avg-quiz-score">0%</div>
+                    <p style="color: var(--text-muted); text-align: center;">Average Score</p>
+                </div>
+                <div class="cert-progress-card">
+                    <h4 style="margin-bottom: 15px; color: var(--accent-purple);">Topics Mastered</h4>
+                    <div style="font-size: 3rem; font-weight: 700; text-align: center; margin: 20px 0; color: var(--accent-pink);" id="topics-mastered">0</div>
+                    <p style="color: var(--text-muted); text-align: center;">Completed Topics</p>
+                </div>
+                <div class="cert-progress-card">
+                    <h4 style="margin-bottom: 15px; color: var(--accent-green);">Current Streak</h4>
+                    <div style="font-size: 3rem; font-weight: 700; text-align: center; margin: 20px 0; color: var(--accent-yellow);" id="analytics-streak">0</div>
+                    <p style="color: var(--text-muted); text-align: center;">Days in a row</p>
+                </div>
+            </div>
         </div>
 
         <!-- Focus Timer Page -->
@@ -2033,7 +2111,40 @@
                     <p style="color: var(--text-muted); margin-top: 5px;">Stay focused with the Pomodoro technique</p>
                 </div>
             </div>
-            <div id="pomodoro-container"></div>
+
+            <div class="stat-card" style="max-width: 600px; margin: 40px auto; text-align: center;">
+                <div style="width: 300px; height: 300px; margin: 0 auto 30px; border-radius: 50%; background: var(--gradient-cosmic); background-size: 200% 200%; animation: gradient-shift 5s ease infinite; display: flex; align-items: center; justify-content: center; box-shadow: 0 20px 60px rgba(255, 110, 199, 0.4);">
+                    <div style="width: 280px; height: 280px; border-radius: 50%; background: var(--bg-secondary); display: flex; align-items: center; justify-content: center;">
+                        <div id="pomodoro-display" style="font-size: 4rem; font-weight: 700; color: var(--accent-cyan); text-shadow: 0 0 20px rgba(0, 229, 255, 0.6);">25:00</div>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 15px; justify-content: center; margin-bottom: 30px;">
+                    <button class="btn btn-primary" id="pomodoro-start" style="min-width: 120px;">Start Focus</button>
+                    <button class="btn btn-secondary" id="pomodoro-pause" style="min-width: 120px; display: none;">Pause</button>
+                    <button class="btn btn-secondary" id="pomodoro-reset" style="min-width: 120px;">Reset</button>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 30px;">
+                    <div>
+                        <div style="font-size: 1.5rem; font-weight: 700; color: var(--accent-green);" id="pomodoro-completed">0</div>
+                        <div style="color: var(--text-muted); font-size: 0.9rem;">Completed Today</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 1.5rem; font-weight: 700; color: var(--accent-purple);" id="pomodoro-total">0</div>
+                        <div style="color: var(--text-muted); font-size: 0.9rem;">Total Sessions</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 1.5rem; font-weight: 700; color: var(--accent-yellow);">25m</div>
+                        <div style="color: var(--text-muted); font-size: 0.9rem;">Session Length</div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; color: var(--text-muted); margin-top: 30px;">
+                <p>🎯 25 minutes of focused work, then take a 5-minute break</p>
+                <p style="margin-top: 10px;">💪 After 4 sessions, take a longer 15-minute break</p>
+            </div>
         </div>
 
         <!-- Exam Mode Page -->
@@ -2044,7 +2155,38 @@
                     <p style="color: var(--text-muted); margin-top: 5px;">Practice with realistic exam conditions</p>
                 </div>
             </div>
-            <div id="exam-simulator-container"></div>
+
+            <div class="cert-progress-grid" style="margin-bottom: 40px;">
+                <div class="cert-progress-card" style="cursor: pointer;" onclick="startExam('csa')">
+                    <div class="cert-icon csa" style="margin-bottom: 15px;">CSA</div>
+                    <h3 style="margin-bottom: 10px;">CSA Practice Exam</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 15px;">90 minutes • 60 questions</p>
+                    <div class="btn btn-primary" style="width: 100%;">Start CSA Exam</div>
+                </div>
+
+                <div class="cert-progress-card" style="cursor: pointer;" onclick="startExam('cad')">
+                    <div class="cert-icon cad" style="margin-bottom: 15px;">CAD</div>
+                    <h3 style="margin-bottom: 10px;">CAD Practice Exam</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 15px;">90 minutes • 60 questions</p>
+                    <div class="btn btn-primary" style="width: 100%;">Start CAD Exam</div>
+                </div>
+
+                <div class="cert-progress-card" style="cursor: pointer;" onclick="startExam('cis-itsm')">
+                    <div class="cert-icon cis" style="margin-bottom: 15px;">CIS</div>
+                    <h3 style="margin-bottom: 10px;">CIS-ITSM Practice Exam</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 15px;">90 minutes • 60 questions</p>
+                    <div class="btn btn-primary" style="width: 100%;">Start CIS Exam</div>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <h3 style="margin-bottom: 20px;">📊 Exam History</h3>
+                <div class="empty-state">
+                    <svg viewBox="0 0 24 24" style="width: 60px; height: 60px; margin-bottom: 15px;"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z" fill="var(--accent-cyan)"/></svg>
+                    <p style="color: var(--text-muted);">No practice exams completed yet</p>
+                    <p style="color: var(--text-muted); margin-top: 10px;">Start your first exam to see your results here!</p>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -2109,5 +2251,45 @@
 
     <!-- Main Application -->
     <script src="static/js/app.js"></script>
+
+    <script>
+        // Stub functions for new features
+        function createFlashcard() {
+            alert('🎴 Flashcard creation coming soon! Use the quiz features for now to test your knowledge.');
+        }
+
+        function startExam(certId) {
+            alert(`🎯 ${certId.toUpperCase()} Exam Simulator coming soon! Use the Quizzes page to practice for now.`);
+        }
+
+        // Pomodoro timer basic functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const startBtn = document.getElementById('pomodoro-start');
+            const pauseBtn = document.getElementById('pomodoro-pause');
+            const resetBtn = document.getElementById('pomodoro-reset');
+            const display = document.getElementById('pomodoro-display');
+
+            if (startBtn && window.pomodoroTimer) {
+                startBtn.addEventListener('click', function() {
+                    window.pomodoroTimer.startWork();
+                    startBtn.style.display = 'none';
+                    pauseBtn.style.display = 'block';
+                });
+
+                pauseBtn.addEventListener('click', function() {
+                    window.pomodoroTimer.pauseTimer();
+                    startBtn.style.display = 'block';
+                    pauseBtn.style.display = 'none';
+                });
+
+                resetBtn.addEventListener('click', function() {
+                    window.pomodoroTimer.reset();
+                    if (display) display.textContent = '25:00';
+                    startBtn.style.display = 'block';
+                    pauseBtn.style.display = 'none';
+                });
+            }
+        });
+    </script>
 </body>
 </html>
