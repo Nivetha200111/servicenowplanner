@@ -1865,9 +1865,9 @@
             </div>
 
             <!-- AI Output -->
-            <div id="ai-output" style="display: none; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 25px; margin-bottom: 30px;">
-                <h3 id="ai-output-title" style="margin-bottom: 15px; color: var(--accent-cyan);">AI Recommendations</h3>
-                <div id="ai-output-content"></div>
+            <div id="ai-output" style="display: none; background: var(--bg-card); backdrop-filter: var(--backdrop-blur); border: 2px solid var(--border-color); border-radius: 16px; padding: 25px; margin-bottom: 30px; box-shadow: 0 8px 32px rgba(255, 110, 199, 0.2);">
+                <h3 id="ai-output-title" style="margin-bottom: 15px; color: var(--accent-cyan); text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);">✨ AI Recommendations</h3>
+                <div id="ai-output-content" style="color: var(--text-secondary); line-height: 1.8;"></div>
             </div>
 
             <!-- Daily Goals -->
@@ -2001,6 +2001,50 @@
                     <button class="btn btn-secondary" onclick="testCalendarWebhook()">Test Calendar</button>
                 </div>
             </div>
+        </div>
+
+        <!-- Flashcards Page -->
+        <div class="page" id="page-flashcards">
+            <div class="study-header">
+                <div>
+                    <h2>✨ Flashcards</h2>
+                    <p style="color: var(--text-muted); margin-top: 5px;">Master concepts with interactive flashcards</p>
+                </div>
+            </div>
+            <div id="flashcards-container"></div>
+        </div>
+
+        <!-- Analytics Page -->
+        <div class="page" id="page-analytics">
+            <div class="study-header">
+                <div>
+                    <h2>📊 Analytics Dashboard</h2>
+                    <p style="color: var(--text-muted); margin-top: 5px;">Track your learning progress and performance</p>
+                </div>
+            </div>
+            <div id="analytics-container"></div>
+        </div>
+
+        <!-- Focus Timer Page -->
+        <div class="page" id="page-focus">
+            <div class="study-header">
+                <div>
+                    <h2>⏰ Focus Timer (Pomodoro)</h2>
+                    <p style="color: var(--text-muted); margin-top: 5px;">Stay focused with the Pomodoro technique</p>
+                </div>
+            </div>
+            <div id="pomodoro-container"></div>
+        </div>
+
+        <!-- Exam Mode Page -->
+        <div class="page" id="page-exam">
+            <div class="study-header">
+                <div>
+                    <h2>🎯 Exam Simulator</h2>
+                    <p style="color: var(--text-muted); margin-top: 5px;">Practice with realistic exam conditions</p>
+                </div>
+            </div>
+            <div id="exam-simulator-container"></div>
         </div>
     </main>
 
