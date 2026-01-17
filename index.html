@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SNowPrep - ServiceNow Certification Study Platform</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,39 +13,38 @@
         }
 
         :root {
-            /* DISCO MIRROR BALL THEME 🪩✨💃 */
-            --bg-primary: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
-            --bg-secondary: rgba(0, 0, 0, 0.98);
-            --bg-tertiary: rgba(20, 0, 20, 0.9);
-            --bg-card: rgba(255, 0, 255, 0.05);
-            --border-color: rgba(0, 255, 0, 0.5);
-            --text-primary: #ffffff;
-            --text-secondary: #f0f0f0;
-            --text-muted: #a0a0a0;
+            /* Y2K 90s DYSTOPIA THEME 💿🎮⚡ */
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #121212;
+            --bg-tertiary: #1a1a1a;
+            --bg-card: rgba(0, 255, 65, 0.03);
+            --border-color: #00ff41;
+            --text-primary: #00ff41;
+            --text-secondary: #00cc33;
+            --text-muted: #008822;
 
-            /* Disco Neon Colors */
-            --accent-blue: #00ffff;
-            --accent-green: #00ff00;
+            /* Matrix Green + Cyber Accents */
+            --accent-blue: #00d4ff;
+            --accent-green: #00ff41;
             --accent-yellow: #ffff00;
-            --accent-red: #ff0066;
-            --accent-purple: #ff00ff;
-            --accent-pink: #ff0099;
+            --accent-red: #ff0055;
+            --accent-purple: #00ff41;
+            --accent-pink: #ff0080;
             --accent-cyan: #00ffff;
-            --accent-orange: #ff6600;
+            --accent-orange: #ff9500;
 
-            /* Disco Gradients */
-            --gradient-primary: linear-gradient(135deg, #ff00ff 0%, #00ff00 100%);
-            --gradient-success: linear-gradient(135deg, #00ff00 0%, #00ffff 100%);
-            --gradient-warning: linear-gradient(135deg, #ff0099 0%, #ff00ff 100%);
-            --gradient-info: linear-gradient(135deg, #00ffff 0%, #ff00ff 100%);
-            --gradient-cosmic: linear-gradient(135deg, #ff00ff 0%, #00ff00 50%, #00ffff 100%);
-            --gradient-sakura: linear-gradient(135deg, #ff0099 0%, #ff00ff 50%, #ff66ff 100%);
-            --gradient-disco: linear-gradient(45deg, #ff00ff 0%, #00ff00 25%, #00ffff 50%, #ff0099 75%, #ff00ff 100%);
+            /* Retro Tech Gradients */
+            --gradient-primary: linear-gradient(135deg, #00ff41 0%, #00d4ff 100%);
+            --gradient-success: linear-gradient(135deg, #00ff41 0%, #00cc33 100%);
+            --gradient-warning: linear-gradient(135deg, #ff0080 0%, #ff0055 100%);
+            --gradient-info: linear-gradient(135deg, #00d4ff 0%, #00ff41 100%);
+            --gradient-cosmic: linear-gradient(135deg, #00ff41 0%, #00d4ff 50%, #ff0080 100%);
+            --gradient-matrix: linear-gradient(180deg, #001100 0%, #003300 50%, #000000 100%);
 
-            /* Glass Effect */
-            --glass-bg: rgba(255, 0, 255, 0.1);
-            --glass-border: rgba(0, 255, 0, 0.4);
-            --backdrop-blur: blur(20px);
+            /* CRT Effect */
+            --glass-bg: rgba(0, 255, 65, 0.05);
+            --glass-border: rgba(0, 255, 65, 0.3);
+            --backdrop-blur: blur(0px);
         }
 
         @keyframes gradient-shift {
@@ -144,9 +143,9 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-family: 'Share Tech Mono', 'Courier New', monospace;
             background: #000000;
-            background: radial-gradient(circle at center, #0a0a0a 0%, #000000 100%);
+            background: var(--gradient-matrix);
             color: var(--text-primary);
             min-height: 100vh;
             display: flex;
@@ -154,7 +153,26 @@
             overflow-x: hidden;
         }
 
-        /* Disco Mirror Ball Spotlights 🪩✨ */
+        /* CRT Scanlines Effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.15) 0px,
+                rgba(0, 0, 0, 0.15) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* Matrix Code Rain Effect 🪩✨ */
         body::before {
             content: '';
             position: fixed;
@@ -173,7 +191,7 @@
             z-index: 0;
         }
 
-        /* Disco Ball overlay */
+        /* Terminal Cursor */
         body::after {
             content: '🪩';
             position: fixed;
@@ -1019,65 +1037,69 @@
             gap: 15px;
         }
 
+        /* Y2K RETRO BUTTONS */
         .btn {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 12px;
+            padding: 14px 28px;
+            border: 3px solid var(--accent-green);
+            border-radius: 0px;
             cursor: pointer;
-            font-size: 0.95rem;
-            font-weight: 600;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 0.85rem;
+            font-weight: 700;
+            font-family: 'Orbitron', monospace;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.2s;
             position: relative;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            background: transparent;
+            color: var(--accent-green);
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.4), inset 0 0 10px rgba(0, 255, 65, 0.1);
         }
 
         .btn::before {
             content: '';
             position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: var(--accent-green);
+            z-index: -1;
+            filter: blur(10px);
+            opacity: 0;
+            transition: opacity 0.3s;
         }
 
         .btn:hover::before {
-            width: 300px;
-            height: 300px;
+            opacity: 0.3;
+        }
+
+        .btn:hover {
+            background: rgba(0, 255, 65, 0.1);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.8), inset 0 0 20px rgba(0, 255, 65, 0.2);
         }
 
         .btn-primary {
-            background: var(--gradient-info);
-            background-size: 200% 200%;
-            color: white;
-            box-shadow: 0 4px 20px rgba(79, 195, 247, 0.4);
-            animation: gradient-shift 3s ease infinite;
+            background: rgba(0, 255, 65, 0.05);
+            border-color: var(--accent-green);
+            color: var(--accent-green);
         }
 
         .btn-primary:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 8px 30px rgba(79, 195, 247, 0.6), 0 0 40px rgba(0, 255, 0, 0.4);
-        }
-
-        .btn-primary:active {
-            transform: translateY(-1px) scale(1.02);
+            background: rgba(0, 255, 65, 0.15);
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(0, 255, 65, 1);
         }
 
         .btn-secondary {
-            background: var(--bg-tertiary);
-            color: var(--text-primary);
-            border: 2px solid var(--border-color);
+            background: transparent;
+            color: var(--text-secondary);
+            border-color: var(--text-muted);
         }
 
         .btn-secondary:hover {
-            background: var(--bg-card);
-            border-color: var(--accent-purple);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 255, 0, 0.3);
+            background: rgba(0, 255, 65, 0.05);
+            border-color: var(--accent-green);
+            color: var(--accent-green);
         }
 
         /* Quiz Results */
@@ -1366,7 +1388,15 @@
             animation: glow-pulse 1s ease-in-out infinite;
         }
 
-        /* Anime Scrollbar */
+        /* Y2K RETRO TYPOGRAPHY */
+        h1, h2, h3, h4, h5, h6, .header-title, .logo-text, .section-title {
+            font-family: 'Orbitron', sans-serif !important;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+        }
+
+        /* Matrix Scrollbar */
         ::-webkit-scrollbar {
             width: 10px;
             height: 10px;
@@ -1385,8 +1415,79 @@
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: var(--gradient-cosmic);
-            box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+            background: var(--gradient-success);
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.8);
+        }
+
+        /* WEEKLY PLANNER GRID */
+        #week-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .day-column {
+            background: var(--bg-tertiary);
+            border: 2px solid var(--border-color);
+            border-radius: 0px;
+            min-height: 200px;
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+        }
+
+        .day-column.today {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 25px rgba(0, 212, 255, 0.5);
+        }
+
+        .day-header {
+            padding: 15px;
+            border-bottom: 2px solid var(--border-color);
+            background: rgba(0, 255, 65, 0.05);
+        }
+
+        .day-name {
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+            color: var(--accent-green);
+            text-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .day-date {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-top: 5px;
+        }
+
+        .day-topics {
+            padding: 10px;
+        }
+
+        .day-topic {
+            font-family: 'Share Tech Mono', monospace;
+            background: rgba(0, 255, 65, 0.05);
+            border-left: 3px solid var(--accent-green);
+            padding: 10px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.85rem;
+        }
+
+        .day-topic:hover {
+            background: rgba(0, 255, 65, 0.15);
+            border-left-width: 5px;
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+        }
+
+        .day-topic.completed {
+            opacity: 0.5;
+            text-decoration: line-through;
+            border-left-color: var(--text-muted);
         }
 
         /* AI Planner Styles */
