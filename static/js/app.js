@@ -3153,3 +3153,24 @@ document.addEventListener('DOMContentLoaded', function() {
         alert('Error initializing app: ' + error.message);
     }
 });
+
+// ==================== EXPOSE FUNCTIONS GLOBALLY ====================
+// These functions need to be accessible from HTML onclick handlers
+window.toggleSidebar = toggleSidebar;
+window.navigateTo = navigateTo;
+window.openNoteModal = openNoteModal;
+window.closeNoteModal = closeNoteModal;
+window.generateWeeklyPlan = generateWeeklyPlan;
+window.getStudyAdvice = getStudyAdvice;
+window.addGoal = addGoal;
+window.toggleGoal = toggleGoal;
+window.removeGoal = removeGoal;
+window.autoPopulateWeek = autoPopulateWeek;
+window.openScheduleTopicModal = openScheduleTopicModal;
+window.testTelegramConnection = testTelegramConnection;
+window.sendTelegramDailyMessage = sendTelegramDailyMessage;
+window.testWhatsAppWebhook = testWhatsAppWebhook;
+window.testCalendarWebhook = testCalendarWebhook;
+window.createFlashcard = createFlashcard;
+window.startExam = startExam;
+window.closeQuizModal = closeQuizModal;
