@@ -2013,9 +2013,9 @@
             </div>
 
             <!-- AI Output -->
-            <div id="ai-output" class="ai-output-hidden" style="background: var(--bg-card); backdrop-filter: var(--backdrop-blur); border: 2px solid var(--border-color); border-radius: 16px; padding: 25px; margin-bottom: 30px; box-shadow: 0 8px 32px rgba(255, 0, 255, 0.3);">
-                <h3 id="ai-output-title" style="margin-bottom: 15px; color: var(--accent-cyan); text-shadow: 0 0 10px rgba(255, 0, 255, 0.6);">✨ AI Recommendations</h3>
-                <div id="ai-output-content" style="color: var(--text-secondary); line-height: 1.8;"></div>
+            <div id="ai-output" class="ai-output-hidden" style="background: var(--bg-tertiary); backdrop-filter: var(--backdrop-blur); border: 3px solid var(--accent-green); border-radius: 0px; padding: 25px; margin-bottom: 30px; box-shadow: 0 0 20px rgba(0, 255, 65, 0.4);">
+                <h3 id="ai-output-title" style="margin-bottom: 15px; color: var(--accent-green); text-shadow: 0 0 10px rgba(0, 255, 65, 0.6); font-family: 'Orbitron', sans-serif; text-transform: uppercase; letter-spacing: 3px;">✨ AI RECOMMENDATIONS</h3>
+                <div id="ai-output-content" style="color: var(--text-primary); line-height: 1.8; font-family: 'Share Tech Mono', monospace;"></div>
             </div>
 
             <!-- Daily Goals -->
@@ -2412,6 +2412,24 @@
     <script src="static/js/app.js"></script>
 
     <script>
+        // Override showPlannerOutput to ensure it displays properly
+        window.addEventListener('DOMContentLoaded', function() {
+            const originalShowPlannerOutput = window.showPlannerOutput;
+            window.showPlannerOutput = function(title, html) {
+                const output = document.getElementById('ai-output');
+                const titleEl = document.getElementById('ai-output-title');
+                const content = document.getElementById('ai-output-content');
+
+                if (output && titleEl && content) {
+                    output.style.display = 'block';
+                    output.classList.remove('ai-output-hidden');
+                    output.classList.add('visible');
+                    titleEl.textContent = title;
+                    content.innerHTML = html;
+                }
+            };
+        });
+
         // Stub functions for new features
         function createFlashcard() {
             alert('🎴 Flashcard creation coming soon! Use the quiz features for now to test your knowledge.');
