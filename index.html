@@ -1971,25 +1971,32 @@
         <div class="page" id="page-planner">
             <div class="study-header">
                 <div>
-                    <h2>AI Study Planner</h2>
-                    <p style="color: var(--text-muted); margin-top: 5px;">Smart study recommendations powered by AI</p>
+                    <h2>SMART PLANNER</h2>
+                    <p style="color: var(--text-muted); margin-top: 5px;">Auto-generated study plans based on your progress</p>
                 </div>
             </div>
 
             <!-- Quick Actions Grid -->
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 30px;">
                 <button id="ai-daily-btn" class="btn btn-primary" onclick="generateDailyPlan()" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
-                    <span>🎯</span> Daily Plan
+                    <span>🎯</span> AUTO DAILY
                 </button>
                 <button id="ai-weekly-btn" class="btn btn-primary" onclick="generateWeeklyPlan()" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
-                    <span>📅</span> Weekly Plan
+                    <span>📅</span> AUTO WEEKLY
                 </button>
                 <button id="ai-advice-btn" class="btn btn-primary" onclick="getStudyAdvice()" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
-                    <span>💡</span> Study Tips
+                    <span>💡</span> STUDY TIPS
                 </button>
                 <button class="btn btn-secondary" onclick="window.open('https://nowlearning.servicenow.com', '_blank')" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
-                    <span>📚</span> Now Learning
+                    <span>📚</span> NOW LEARNING
                 </button>
+            </div>
+
+            <!-- Info Banner -->
+            <div style="background: rgba(0, 212, 255, 0.1); border: 2px solid var(--accent-cyan); border-radius: 0px; padding: 15px; margin-bottom: 20px;">
+                <p style="color: var(--accent-cyan); font-family: 'Share Tech Mono', monospace; font-size: 0.9rem; margin: 0;">
+                    ℹ️ <strong>NOTE:</strong> These are algorithm-based recommendations, not real AI. Plans are generated from your progress data using smart sorting logic.
+                </p>
             </div>
 
             <!-- Progress Summary -->
@@ -2012,9 +2019,9 @@
                 </div>
             </div>
 
-            <!-- AI Output -->
+            <!-- Smart Output -->
             <div id="ai-output" class="ai-output-hidden" style="background: var(--bg-tertiary); backdrop-filter: var(--backdrop-blur); border: 3px solid var(--accent-green); border-radius: 0px; padding: 25px; margin-bottom: 30px; box-shadow: 0 0 20px rgba(0, 255, 65, 0.4);">
-                <h3 id="ai-output-title" style="margin-bottom: 15px; color: var(--accent-green); text-shadow: 0 0 10px rgba(0, 255, 65, 0.6); font-family: 'Orbitron', sans-serif; text-transform: uppercase; letter-spacing: 3px;">✨ AI RECOMMENDATIONS</h3>
+                <h3 id="ai-output-title" style="margin-bottom: 15px; color: var(--accent-green); text-shadow: 0 0 10px rgba(0, 255, 65, 0.6); font-family: 'Orbitron', sans-serif; text-transform: uppercase; letter-spacing: 3px;">⚡ SMART RECOMMENDATIONS</h3>
                 <div id="ai-output-content" style="color: var(--text-primary); line-height: 1.8; font-family: 'Share Tech Mono', monospace;"></div>
             </div>
 
