@@ -1976,17 +1976,40 @@
                 </div>
             </div>
 
-            <!-- AI Actions -->
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-bottom: 30px;">
+            <!-- Quick Actions Grid -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 30px;">
                 <button id="ai-daily-btn" class="btn btn-primary" onclick="generateDailyPlan()" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
-                    <span>🎯</span> Generate Daily Plan
+                    <span>🎯</span> Daily Plan
                 </button>
                 <button id="ai-weekly-btn" class="btn btn-primary" onclick="generateWeeklyPlan()" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
-                    <span>📅</span> Generate Weekly Plan
+                    <span>📅</span> Weekly Plan
                 </button>
                 <button id="ai-advice-btn" class="btn btn-primary" onclick="getStudyAdvice()" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
-                    <span>💡</span> Get Study Advice
+                    <span>💡</span> Study Tips
                 </button>
+                <button class="btn btn-secondary" onclick="window.open('https://nowlearning.servicenow.com', '_blank')" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+                    <span>📚</span> Now Learning
+                </button>
+            </div>
+
+            <!-- Progress Summary -->
+            <div class="stats-grid" style="margin-bottom: 30px;">
+                <div class="stat-card">
+                    <div class="stat-label">CSA Progress</div>
+                    <div class="stat-value" id="csa-progress-percent">0%</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">CAD Progress</div>
+                    <div class="stat-value" id="cad-progress-percent">0%</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">CIS Progress</div>
+                    <div class="stat-value" id="cis-progress-percent">0%</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Total Topics</div>
+                    <div class="stat-value" id="total-topics-done">0</div>
+                </div>
             </div>
 
             <!-- AI Output -->
@@ -2442,6 +2465,44 @@
                 });
                 observer.observe(aiOutput, { attributes: true });
             }
+
+            // Update planner progress stats when on planner page
+            function updatePlannerStats() {
+                if (!window.state || !window.certifications) return;
+
+                const csaTopics = window.certifications.csa?.sections.flatMap(s => s.topics) || [];
+                const cadTopics = window.certifications.cad?.sections.flatMap(s => s.topics) || [];
+                const cisTopics = window.certifications['cis-itsm']?.sections.flatMap(s => s.topics) || [];
+
+                const csaDone = csaTopics.filter(t => window.state.progress[t.id]).length;
+                const cadDone = cadTopics.filter(t => window.state.progress[t.id]).length;
+                const cisDone = cisTopics.filter(t => window.state.progress[t.id]).length;
+
+                const csaPercent = csaTopics.length ? Math.round((csaDone / csaTopics.length) * 100) : 0;
+                const cadPercent = cadTopics.length ? Math.round((cadDone / cadTopics.length) * 100) : 0;
+                const cisPercent = cisTopics.length ? Math.round((cisDone / cisTopics.length) * 100) : 0;
+
+                const totalDone = csaDone + cadDone + cisDone;
+
+                document.getElementById('csa-progress-percent').textContent = csaPercent + '%';
+                document.getElementById('cad-progress-percent').textContent = cadPercent + '%';
+                document.getElementById('cis-progress-percent').textContent = cisPercent + '%';
+                document.getElementById('total-topics-done').textContent = totalDone;
+            }
+
+            // Update stats when navigating to planner
+            const originalNavigateTo = window.navigateTo;
+            if (typeof originalNavigateTo === 'function') {
+                window.navigateTo = function(page) {
+                    originalNavigateTo(page);
+                    if (page === 'planner') {
+                        setTimeout(updatePlannerStats, 100);
+                    }
+                };
+            }
+
+            // Update on page load if already on planner
+            setTimeout(updatePlannerStats, 500);
         });
     </script>
 </body>
