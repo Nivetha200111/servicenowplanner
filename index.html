@@ -13,37 +13,38 @@
         }
 
         :root {
-            /* Anime-Themed Vibrant Colors 🌸✨ */
-            --bg-primary: linear-gradient(135deg, #ff6ec7 0%, #7b68ee 50%, #4a90e2 100%);
-            --bg-secondary: rgba(30, 15, 50, 0.95);
-            --bg-tertiary: rgba(60, 30, 80, 0.85);
+            /* Y2K Cyber Colors 🌟✨💿 */
+            --bg-primary: linear-gradient(135deg, #00d4ff 0%, #ff006e 50%, #ffbe0b 100%);
+            --bg-secondary: rgba(10, 10, 30, 0.95);
+            --bg-tertiary: rgba(20, 20, 50, 0.85);
             --bg-card: rgba(255, 255, 255, 0.08);
-            --border-color: rgba(255, 180, 255, 0.3);
+            --border-color: rgba(0, 212, 255, 0.4);
             --text-primary: #ffffff;
-            --text-secondary: #f0e6ff;
-            --text-muted: #c9b3e6;
+            --text-secondary: #e0f7ff;
+            --text-muted: #8ec5fc;
 
-            /* Kawaii Accent Colors */
-            --accent-blue: #4fc3f7;
-            --accent-green: #4db6ac;
-            --accent-yellow: #ffeb3b;
-            --accent-red: #ff6b9d;
-            --accent-purple: #ba68c8;
-            --accent-pink: #ff80ab;
-            --accent-cyan: #00e5ff;
-            --accent-orange: #ffab40;
+            /* Y2K Accent Colors */
+            --accent-blue: #00d4ff;
+            --accent-green: #00ff88;
+            --accent-yellow: #ffbe0b;
+            --accent-red: #ff006e;
+            --accent-purple: #00d4ff;
+            --accent-pink: #ff006e;
+            --accent-cyan: #00ffff;
+            --accent-orange: #ff9500;
 
-            /* Anime Gradients */
-            --gradient-primary: linear-gradient(135deg, #ff6ec7 0%, #ba68c8 100%);
-            --gradient-success: linear-gradient(135deg, #4db6ac 0%, #00e5ff 100%);
-            --gradient-warning: linear-gradient(135deg, #ff80ab 0%, #ff6b9d 100%);
-            --gradient-info: linear-gradient(135deg, #4fc3f7 0%, #7b68ee 100%);
-            --gradient-cosmic: linear-gradient(135deg, #ff6ec7 0%, #ffeb3b 50%, #00e5ff 100%);
-            --gradient-sakura: linear-gradient(135deg, #ffc0cb 0%, #ff80ab 50%, #ba68c8 100%);
+            /* Y2K Chrome Gradients */
+            --gradient-primary: linear-gradient(135deg, #00d4ff 0%, #00ffff 100%);
+            --gradient-success: linear-gradient(135deg, #00ff88 0%, #00d4ff 100%);
+            --gradient-warning: linear-gradient(135deg, #ff006e 0%, #ff9500 100%);
+            --gradient-info: linear-gradient(135deg, #00d4ff 0%, #00ffff 100%);
+            --gradient-cosmic: linear-gradient(135deg, #ff006e 0%, #ffbe0b 50%, #00d4ff 100%);
+            --gradient-sakura: linear-gradient(135deg, #ff006e 0%, #ff9500 50%, #ffbe0b 100%);
+            --gradient-chrome: linear-gradient(135deg, #e0e0e0 0%, #ffffff 25%, #e0e0e0 50%, #ffffff 75%, #e0e0e0 100%);
 
             /* Glass Effect */
             --glass-bg: rgba(255, 255, 255, 0.12);
-            --glass-border: rgba(255, 200, 255, 0.3);
+            --glass-border: rgba(0, 212, 255, 0.4);
             --backdrop-blur: blur(15px);
         }
 
@@ -60,10 +61,10 @@
 
         @keyframes pulse-glow {
             0%, 100% {
-                box-shadow: 0 0 25px rgba(255, 110, 199, 0.5), 0 0 50px rgba(186, 104, 200, 0.3);
+                box-shadow: 0 0 25px rgba(0, 212, 255, 0.6), 0 0 50px rgba(0, 255, 255, 0.4);
             }
             50% {
-                box-shadow: 0 0 40px rgba(255, 110, 199, 0.8), 0 0 80px rgba(186, 104, 200, 0.6);
+                box-shadow: 0 0 40px rgba(0, 212, 255, 0.9), 0 0 80px rgba(0, 255, 255, 0.7);
             }
         }
 
@@ -119,17 +120,17 @@
 
         @keyframes glow-pulse {
             0%, 100% {
-                text-shadow: 0 0 10px rgba(255, 110, 199, 0.5), 0 0 20px rgba(186, 104, 200, 0.3);
+                text-shadow: 0 0 10px rgba(0, 212, 255, 0.6), 0 0 20px rgba(0, 255, 255, 0.4);
             }
             50% {
-                text-shadow: 0 0 20px rgba(255, 110, 199, 0.8), 0 0 40px rgba(186, 104, 200, 0.6), 0 0 60px rgba(0, 229, 255, 0.4);
+                text-shadow: 0 0 20px rgba(0, 212, 255, 0.9), 0 0 40px rgba(0, 255, 255, 0.7), 0 0 60px rgba(255, 190, 11, 0.5);
             }
         }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: #1a0033;
-            background: linear-gradient(135deg, #1a0033 0%, #2d1b4e 50%, #1e0a3d 100%);
+            background: #000814;
+            background: linear-gradient(135deg, #000814 0%, #001d3d 50%, #003566 100%);
             background-size: 400% 400%;
             animation: gradient-shift 20s ease infinite;
             color: var(--text-primary);
@@ -139,7 +140,7 @@
             overflow-x: hidden;
         }
 
-        /* Anime-style floating background particles ✨ */
+        /* Y2K Cyber Grid Background 💿✨ */
         body::before {
             content: '';
             position: fixed;
@@ -148,11 +149,11 @@
             width: 100%;
             height: 100%;
             background-image:
-                radial-gradient(circle at 15% 40%, rgba(255, 110, 199, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 85% 70%, rgba(186, 104, 200, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 50% 30%, rgba(0, 229, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 70% 90%, rgba(255, 128, 171, 0.12) 0%, transparent 50%),
-                radial-gradient(circle at 30% 80%, rgba(79, 195, 247, 0.1) 0%, transparent 50%);
+                radial-gradient(circle at 15% 40%, rgba(0, 212, 255, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 85% 70%, rgba(255, 0, 110, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 50% 30%, rgba(0, 255, 255, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 70% 90%, rgba(255, 190, 11, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 30% 80%, rgba(0, 255, 136, 0.12) 0%, transparent 50%);
             animation: float 25s ease-in-out infinite;
             pointer-events: none;
             z-index: 0;
@@ -177,7 +178,7 @@
             background: var(--bg-secondary);
             backdrop-filter: var(--backdrop-blur);
             border-right: 2px solid var(--border-color);
-            box-shadow: 0 0 30px rgba(255, 110, 199, 0.2);
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
             height: 100vh;
             position: fixed;
             left: 0;
@@ -189,7 +190,7 @@
         }
 
         .sidebar:hover {
-            box-shadow: 0 0 40px rgba(255, 110, 199, 0.3), 0 0 60px rgba(186, 104, 200, 0.2);
+            box-shadow: 0 0 40px rgba(0, 212, 255, 0.4), 0 0 60px rgba(0, 255, 255, 0.3);
         }
 
         .logo {
@@ -212,13 +213,13 @@
             font-weight: 700;
             font-size: 18px;
             animation: gradient-shift 8s ease infinite, float 4s ease-in-out infinite;
-            box-shadow: 0 4px 15px rgba(255, 110, 199, 0.4);
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.5);
             transition: all 0.3s ease;
         }
 
         .logo-icon:hover {
             transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 6px 25px rgba(255, 110, 199, 0.6), 0 0 40px rgba(186, 104, 200, 0.4);
+            box-shadow: 0 6px 25px rgba(0, 212, 255, 0.7), 0 0 40px rgba(0, 255, 255, 0.5);
         }
 
         .logo-text {
@@ -272,7 +273,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 110, 199, 0.2), transparent);
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.2), transparent);
             transition: left 0.5s ease;
         }
 
@@ -284,11 +285,11 @@
             background: var(--bg-tertiary);
             color: var(--text-primary);
             transform: translateX(5px);
-            box-shadow: 0 4px 15px rgba(255, 110, 199, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
         }
 
         .nav-item.active {
-            background: linear-gradient(135deg, rgba(79, 195, 247, 0.2), rgba(186, 104, 200, 0.2));
+            background: linear-gradient(135deg, rgba(79, 195, 247, 0.2), rgba(0, 255, 255, 0.2));
             color: var(--accent-cyan);
             box-shadow: 0 4px 20px rgba(79, 195, 247, 0.3);
             animation: pulse-glow 2s ease-in-out infinite;
@@ -333,7 +334,7 @@
             background: var(--bg-secondary);
             backdrop-filter: var(--backdrop-blur);
             border-bottom: 2px solid var(--border-color);
-            box-shadow: 0 4px 20px rgba(255, 110, 199, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 212, 255, 0.1);
             padding: 15px 30px;
             display: flex;
             justify-content: space-between;
@@ -345,7 +346,7 @@
         }
 
         .header:hover {
-            box-shadow: 0 4px 25px rgba(255, 110, 199, 0.2), 0 0 40px rgba(186, 104, 200, 0.1);
+            box-shadow: 0 4px 25px rgba(0, 212, 255, 0.2), 0 0 40px rgba(0, 255, 255, 0.1);
         }
 
         .header-title {
@@ -402,14 +403,14 @@
             justify-content: center;
             font-weight: 700;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(255, 128, 171, 0.4);
+            box-shadow: 0 4px 15px rgba(255, 0, 110, 0.4);
             transition: all 0.3s ease;
             animation: gradient-shift 4s ease infinite;
         }
 
         .user-avatar:hover {
             transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 6px 25px rgba(255, 128, 171, 0.6), 0 0 40px rgba(186, 104, 200, 0.4);
+            box-shadow: 0 6px 25px rgba(255, 0, 110, 0.6), 0 0 40px rgba(0, 255, 255, 0.4);
         }
 
         /* Page Container */
@@ -450,7 +451,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255, 110, 199, 0.1), transparent);
+            background: linear-gradient(45deg, transparent, rgba(0, 212, 255, 0.1), transparent);
             transform: rotate(45deg);
             transition: all 0.6s ease;
         }
@@ -458,7 +459,7 @@
         .stat-card:hover {
             transform: translateY(-8px) scale(1.02);
             border-color: var(--accent-pink);
-            box-shadow: 0 10px 40px rgba(255, 110, 199, 0.3), 0 0 60px rgba(186, 104, 200, 0.2);
+            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.3), 0 0 60px rgba(0, 255, 255, 0.2);
         }
 
         .stat-card:hover::before {
@@ -546,7 +547,7 @@
         .cert-progress-card:hover {
             border-color: var(--accent-cyan);
             transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 10px 40px rgba(79, 195, 247, 0.4), 0 0 60px rgba(186, 104, 200, 0.3);
+            box-shadow: 0 10px 40px rgba(79, 195, 247, 0.4), 0 0 60px rgba(0, 255, 255, 0.3);
         }
 
         .cert-progress-card:hover::after {
@@ -821,7 +822,7 @@
         .topic-action-btn.quiz-btn:hover {
             background: var(--gradient-primary);
             border-color: var(--accent-purple);
-            box-shadow: 0 6px 20px rgba(186, 104, 200, 0.4);
+            box-shadow: 0 6px 20px rgba(0, 255, 255, 0.4);
         }
 
         .topic-action-btn.learn-btn {
@@ -1045,7 +1046,7 @@
 
         .btn-primary:hover {
             transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 8px 30px rgba(79, 195, 247, 0.6), 0 0 40px rgba(186, 104, 200, 0.4);
+            box-shadow: 0 8px 30px rgba(79, 195, 247, 0.6), 0 0 40px rgba(0, 255, 255, 0.4);
         }
 
         .btn-primary:active {
@@ -1062,7 +1063,7 @@
             background: var(--bg-card);
             border-color: var(--accent-purple);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(186, 104, 200, 0.3);
+            box-shadow: 0 6px 20px rgba(0, 255, 255, 0.3);
         }
 
         /* Quiz Results */
@@ -1371,10 +1372,19 @@
 
         ::-webkit-scrollbar-thumb:hover {
             background: var(--gradient-cosmic);
-            box-shadow: 0 0 10px rgba(255, 110, 199, 0.5);
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
         }
 
         /* AI Planner Styles */
+        .ai-output-hidden {
+            display: none;
+        }
+
+        .ai-output.visible,
+        #ai-output.visible {
+            display: block !important;
+        }
+
         .ai-suggestion {
             display: flex;
             justify-content: space-between;
@@ -1865,8 +1875,8 @@
             </div>
 
             <!-- AI Output -->
-            <div id="ai-output" style="display: none; background: var(--bg-card); backdrop-filter: var(--backdrop-blur); border: 2px solid var(--border-color); border-radius: 16px; padding: 25px; margin-bottom: 30px; box-shadow: 0 8px 32px rgba(255, 110, 199, 0.2);">
-                <h3 id="ai-output-title" style="margin-bottom: 15px; color: var(--accent-cyan); text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);">✨ AI Recommendations</h3>
+            <div id="ai-output" class="ai-output-hidden" style="background: var(--bg-card); backdrop-filter: var(--backdrop-blur); border: 2px solid var(--border-color); border-radius: 16px; padding: 25px; margin-bottom: 30px; box-shadow: 0 8px 32px rgba(0, 212, 255, 0.3);">
+                <h3 id="ai-output-title" style="margin-bottom: 15px; color: var(--accent-cyan); text-shadow: 0 0 10px rgba(0, 212, 255, 0.6);">✨ AI Recommendations</h3>
                 <div id="ai-output-content" style="color: var(--text-secondary); line-height: 1.8;"></div>
             </div>
 
@@ -2113,7 +2123,7 @@
             </div>
 
             <div class="stat-card" style="max-width: 600px; margin: 40px auto; text-align: center;">
-                <div style="width: 300px; height: 300px; margin: 0 auto 30px; border-radius: 50%; background: var(--gradient-cosmic); background-size: 200% 200%; animation: gradient-shift 5s ease infinite; display: flex; align-items: center; justify-content: center; box-shadow: 0 20px 60px rgba(255, 110, 199, 0.4);">
+                <div style="width: 300px; height: 300px; margin: 0 auto 30px; border-radius: 50%; background: var(--gradient-cosmic); background-size: 200% 200%; animation: gradient-shift 5s ease infinite; display: flex; align-items: center; justify-content: center; box-shadow: 0 20px 60px rgba(0, 212, 255, 0.4);">
                     <div style="width: 280px; height: 280px; border-radius: 50%; background: var(--bg-secondary); display: flex; align-items: center; justify-content: center;">
                         <div id="pomodoro-display" style="font-size: 4rem; font-weight: 700; color: var(--accent-cyan); text-shadow: 0 0 20px rgba(0, 229, 255, 0.6);">25:00</div>
                     </div>
