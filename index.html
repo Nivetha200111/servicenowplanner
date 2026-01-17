@@ -1999,8 +1999,19 @@
             <div class="stat-card" style="margin-bottom: 30px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
                     <h3>Today's Goals</h3>
-                    <button class="btn btn-primary" onclick="addGoal()" style="padding: 8px 16px; font-size: 0.9rem;">+ Add Goal</button>
                 </div>
+
+                <form onsubmit="addGoal(event)" style="margin-bottom: 20px; display: flex; gap: 10px;">
+                    <input
+                        type="text"
+                        id="new-goal-input"
+                        placeholder="What do you want to accomplish today?"
+                        style="flex: 1; padding: 12px; background: var(--bg-tertiary); border: 2px solid var(--border-color); border-radius: 0px; color: var(--text-primary); font-family: 'Share Tech Mono', monospace;"
+                        required
+                    >
+                    <button type="submit" class="btn btn-primary" style="padding: 12px 24px;">+ ADD</button>
+                </form>
+
                 <div id="goals-list"></div>
             </div>
 
